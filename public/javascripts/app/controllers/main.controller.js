@@ -20,17 +20,18 @@ app.controller('mainController', ['$scope', 'UsersFactory', 'PostsFactory', 'Com
 			});
 
 
-
 		CommentsFactory.get()
 			.then(function(data){
 				console.log('COMMENTS', data);
 			});
 
+		$scope.welcomeMessage = true;
+
 		$scope.toggleProfile = function(user) {
 			$scope.profilePosts = false;
 			$scope.profileDetails = true;
 			$scope.userDetails = user;
-			$scope.postComments = [];
+			$scope.welcomeMessage = false;
 
 			PostsFactory.getByUserId(user.id)
 				.then(function(data){
@@ -48,12 +49,10 @@ app.controller('mainController', ['$scope', 'UsersFactory', 'PostsFactory', 'Com
 			$scope.profilePosts = true;
 		}
 
-		$scope.postComments = [];
-
-		$scope.togglePostComments = function(postId, indx) {
+		$scope.togglePostComments = function(postId, post, indx) {
 			CommentsFactory.getByPostId(postId)
 				.then(function(data){
-					$scope.postComments[indx] = data;
+					post.comments = data;
 				})
 		}
 
