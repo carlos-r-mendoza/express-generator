@@ -1,10 +1,19 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url('/images/background-image2.jpg');
 }
 
 a {
   color: #00B7FF;
+}
+
+dl {
+
+}
+
+.well {
+	background: #ffffff !important;
 }
 
 .friends-list-section{
@@ -24,8 +33,15 @@ a {
 	line-height: 2;
 }
 
-.friend-details {
-	min-height: 379px;
+.friend-details-section {
+	min-height: 415px;
+	font-size: 18px;	
+	margin-left: 50px;
+	min-width: 950px;
+}
+
+.name-title {
+	padding-top: 25px;
 }
 
 .btn-profile-posts {
@@ -34,4 +50,5 @@ a {
 
 .user-posts {
 	margin: 10px 0px;
+	font-size: 18px;
 }
