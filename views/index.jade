@@ -1,5 +1,36 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h2.well.text-center {{title}}
+	div.well.col-sm-3.col-md-3.col-lg-3
+		h4.text-center Friends List
+		div.bg-info.friends-list-section
+			div.friend-name(ng-repeat='user in users')
+				strong {{user.name}}
+				button.btn.btn-primary(ng-click='toggleProfile(user)') View Profile
+	div.well.friend-details.col-sm-8.col-sm-offset-1.col-md-8.col-md-offset-1.col-lg-8.col-md-offset-1
+			div.btn-group.btn-profile-posts(role='group', aria-label='...')
+				button.btn.btn-default(type='button', ng-click='showUserProfile()') Profile
+				button.btn.btn-default(type='button', ng-click='showUserPosts()') Posts
+			br		
+			div(ng-show='profileDetails')
+				p Name: {{userDetails.name}}
+				p Username: {{userDetails.username}}
+				p Email: {{userDetails.email}}
+				p Address: {{userDetails.address.street}}, {{userDetails.address.city}}, {{userDetails.address.zipcode}} 
+				p Phone: {{userDetails.phone}}
+				p Website: {{userDetails.website}}
+				p Company: {{userDetails.company.name}},
+					em {{userDetails.company.catchPhrase}}, {{userDetails.company.bs}}
+			div.user-posts(ng-show='profilePosts', ng-repeat='post in userPosts')
+				p 
+					strong {{post.title}}
+				p {{post.body}} 
+					a(href='', ng-click='togglePostComments(post.id, $index)') (see comments)
+				ul
+					li(ng-repeat='comment in postComments[$index]')
+						{{comment.name}}
+						{{comment.body}}
+						{{comment.email}}
+
+

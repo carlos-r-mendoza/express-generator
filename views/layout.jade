@@ -2,15 +2,16 @@ doctype html
 html(ng-app="ngMyApp")
 	head
 		title= title
+		//- Bootstrap css file
+		link(rel='stylesheet', href='javascripts/vendors/bootstrap-3.3.5-dist/css/bootstrap.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
-		script(src="javascripts/vendors/jquery-1.11.3.js")
-		script(src="javascripts/vendors/angular.js")
-		//- script(src="javascripts/app/controllers/main.controller.js")
-		script(src="javascripts/app.min.js")
+		script(src='javascripts/vendors/angular.js')
+		script(src='javascripts/vendors/jquery-1.11.3.js')
+		//- Bootstrap js file
+		script(src='javascripts/vendors/bootstrap-3.3.5-dist/js/bootstrap.js')
+		script(src='javascripts/app.min.js')
+		script(src='javascripts/app/filters/postsUsers.filter.js')
+
 	body
-		div(ng-controller="mainController")
-			h2 {{title}}
-			h2 Below is data from the GET AJAX request:
-			h3 {{info.title}}
-			p {{info.body}}
+		div(ng-controller='mainController')
 			block content
