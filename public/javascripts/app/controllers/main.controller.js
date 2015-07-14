@@ -1,14 +1,60 @@
-var app = angular.module("ngMyApp", []);
+'use strict';
 
-app.controller("mainController", ["$scope", "MainFactory", function($scope, MainFactory){
+var app = angular.module('ngMyApp', []);
+
+app.controller('mainController', ['$scope', 'UsersFactory', 'PostsFactory', 'CommentsFactory', function($scope, UsersFactory, PostsFactory, CommentsFactory){
 		
-		$scope.title = "This is my test app for Angular and Express!";
+		$scope.title = "Sample Social Media Application Using Angular and Express!";
 
-		MainFactory.getInfo()
-			.then(function(info){
-				$scope.info = info;
+		//Friends List Section
+
+		UsersFactory.getUsers()
+			.then(function(data){
+				$scope.users = data;
 			})
 
+		PostsFactory.get()
+			.then(function(data){
+				$scope.posts = data;
+				console.log('POSTS', data);
+			});
 
+
+
+		CommentsFactory.get()
+			.then(function(data){
+				console.log('COMMENTS', data);
+			});
+
+		$scope.toggleProfile = function(user) {
+			$scope.profilePosts = false;
+			$scope.profileDetails = true;
+			$scope.userDetails = user;
+			$scope.postComments = [];
+
+			PostsFactory.getByUserId(user.id)
+				.then(function(data){
+					$scope.userPosts = data;
+				})
+		} 
+
+		$scope.showUserProfile = function() {
+			$scope.profilePosts = false;
+			$scope.profileDetails = true;
+		}
+
+		$scope.showUserPosts = function() {
+			$scope.profileDetails = false;
+			$scope.profilePosts = true;
+		}
+
+		$scope.postComments = [];
+
+		$scope.togglePostComments = function(postId, indx) {
+			CommentsFactory.getByPostId(postId)
+				.then(function(data){
+					$scope.postComments[indx] = data;
+				})
+		}
 
 	}]);

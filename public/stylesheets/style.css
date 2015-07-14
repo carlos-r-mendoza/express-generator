@@ -6,3 +6,32 @@ body {
 a {
   color: #00B7FF;
 }
+
+.friends-list-section{
+	padding: 10px 10px;
+	border-radius: 4px;
+}
+
+.btn-primary {
+	margin-right: 5px !important;
+	float: right;
+	font-size: 10px;
+	padding: 3px 5px;	
+}
+
+.friend-name {
+	clear: both;
+	line-height: 2;
+}
+
+.friend-details {
+	min-height: 379px;
+}
+
+.btn-profile-posts {
+	margin-bottom: 30px;
+}
+
+.user-posts {
+	margin: 10px 0px;
+}
