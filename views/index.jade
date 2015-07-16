@@ -6,48 +6,48 @@ block content
 		h4.text-center Friends List
 		hr
 		div.bg-info.friends-list-section
-			div.friend-name(ng-repeat='user in users')
+			div.friend-name(ng-repeat="user in users")
 				strong {{user.name}}
-				button.btn.btn-primary(ng-click='toggleProfile(user)') View Profile
+				button.btn.btn-primary(ng-click="toggleProfile(user)") View Profile
 	div.well.friend-details-section.col-sm-8.col-sm-offset-1.col-md-8.col-md-offset-1.col-lg-8.col-md-offset-1
-			div(ng-show='welcomeMessage')
+			div(ng-show="welcome_message")
 				p Welcome! Click on a friend to see their profile details!
-			div.btn-group.btn-profile-posts(role='group', aria-label='...', ng-hide='welcomeMessage')
-				button.btn.btn-default(type='button', ng-click='showUserProfile()') Profile
-				button.btn.btn-default(type='button', ng-click='showUserPosts()') Posts
-			h4.name-title.pull-right {{userDetails.name}}
+			div.btn-group.btn-profile-posts(role="group", aria-label="...", ng-hide="welcome_message")
+				button.btn.btn-default(type="button", ng-click="showUserProfile()") Profile
+				button.btn.btn-default(type="button", ng-click="showUserPosts()") Posts
+			h4.name-title.pull-right {{user_details.name}}
 			hr		
-			div(ng-show='profileDetails')
+			div(ng-show="profile_details")
 				p 
 					strong Name: 
-					| {{userDetails.name}}
+					| {{user_details.name}}
 				p 
 					strong Username: 
-					| {{userDetails.username}}
+					| {{user_details.username}}
 				p 
 					strong Email: 
-					| {{userDetails.email}}
+					| {{user_details.email}}
 				p 
 					strong Address: 
-					| {{userDetails.address.street}}, {{userDetails.address.city}}, {{userDetails.address.zipcode}} 
+					| {{user_details.address.street}}, {{user_details.address.city}}, {{user_details.address.zipcode}} 
 				p 
 					strong Phone: 
-					| {{userDetails.phone}}
+					| {{user_details.phone}}
 				p 
 					strong Website: 
-					| {{userDetails.website}}
+					| {{user_details.website}}
 				p 
 					strong Company: 
-					| {{userDetails.company.name}},
-					em {{userDetails.company.catchPhrase}}, {{userDetails.company.bs}}
-			div.user-posts(ng-show='profilePosts', ng-repeat='post in userPosts')
-				p 
+					| {{user_details.company.name}},
+					em {{user_details.company.catchPhrase}}, {{user_details.company.bs}}
+			ul.user-posts(ng-show="profile_posts", ng-repeat="post in user_posts")
+				li 
 					strong {{post.title}}
-				p {{post.body}} 
-					a(href='', ng-click='togglePostComments(post.id, post, $index); showPostComments = !showPostComments') 
-						span(ng-hide='showPostComments') (see comments)
-						span(ng-show='showPostComments') (hide comments)
-				blockquote(ng-if='showPostComments', ng-repeat='comment in post.comments')
+				li {{post.body}} 
+					a(href="", ng-click="togglePostComments(post); show_post_comments = !show_post_comments") 
+						span(ng-hide="show_post_comments") (see comments)
+						span(ng-show="show_post_comments") (hide comments)
+				blockquote(ng-if="show_post_comments", ng-repeat="comment in post.comments")
 					p 
 						strong {{comment.name}}
 					p {{comment.body}}
