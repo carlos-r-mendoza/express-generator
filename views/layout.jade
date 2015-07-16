@@ -13,5 +13,24 @@ html(ng-app="ngMyApp")
 		script(src='javascripts/app/filters/postsUsers.filter.js')
 
 	body
-		div(ng-controller='mainController')
+		
+		nav.navbar.navbar-inverse.navbar-fixed-top
+			//- centers container
+			div.container
+				div.navbar-header
+					//- position to the left of the page
+					a.navbar-brand(href='/') Sample Apps
+						//- adds padding for all the navigation links
+						//- styles li as links for navigation
+				ul.nav.navbar-nav.navbar-right
+					li.active
+						a(href='') Home
+					li
+						a(href='') Test
+
+		div.container-fluid(ng-controller='mainController')
 			block content
+
+	footer.navbar.navbar-inverse.navbar-fixed-bottom
+		div.container
+			p.text-center Footer Example

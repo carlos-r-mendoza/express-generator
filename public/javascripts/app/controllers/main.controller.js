@@ -17,11 +17,13 @@ app.controller('mainController', ['$scope', 'Users', 'Posts', 'Comments', functi
 
 		//gets user's posts when view profile button is clicked
 		$scope.toggleProfile = function(user) {
+			//modifies view
+			$scope.welcome_message = false;
 			$scope.profile_posts = false;
 			$scope.profile_details = true;
+			//populates user details
 			$scope.user_details = user;
-			$scope.welcome_message = false;
-
+			//gets user's posts
 			Posts.getByUserId(user.id)
 				.then(function(data){
 					$scope.user_posts = data;
