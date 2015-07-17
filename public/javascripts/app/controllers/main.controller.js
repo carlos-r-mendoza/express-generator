@@ -1,8 +1,27 @@
 'use strict';
 
-var app = angular.module('ngMyApp', []);
+var app = angular.module('ngMyApp', ['ui.router']);
 
-app.controller('mainController', ['$scope', 'Users', 'Posts', 'Comments', function($scope, Users, Posts, Comments){
+app.config(function ($locationProvider, $urlRouterProvider) {
+
+    $locationProvider.html5Mode(true);
+
+    $urlRouterProvider.otherwise('/');
+
+});
+
+
+
+app.config(function($stateProvider) {
+	$stateProvider
+		.state('main', {
+			url: '/',
+			templateUrl: '/index.html',
+			controller: 'MainController',
+		});
+});
+
+app.controller('MainController', ['$scope', 'Users', 'Posts', 'Comments', function($scope, Users, Posts, Comments){
 		
 		$scope.title = 'Sample Social Media Application Using Angular and Express!';
 			

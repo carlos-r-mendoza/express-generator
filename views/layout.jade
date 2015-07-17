@@ -2,6 +2,7 @@ doctype html
 html(ng-app="ngMyApp")
 	head
 		title= title
+		base(href="/")
 		//- Bootstrap css file
 		link(rel='stylesheet', href='bootstrap-3.3.5-dist/css/bootstrap.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
@@ -9,8 +10,9 @@ html(ng-app="ngMyApp")
 		script(src='javascripts/vendors/jquery-1.11.3.js')
 		//- Bootstrap js file
 		script(src='bootstrap-3.3.5-dist/js/bootstrap.js')
+		script(src='javascripts/vendors/angular-ui-router.js')
 		script(src='javascripts/app.min.js')
-		script(src='javascripts/app/filters/postsUsers.filter.js')
+
 
 	body
 		
@@ -24,12 +26,13 @@ html(ng-app="ngMyApp")
 						//- styles li as links for navigation
 				ul.nav.navbar-nav.navbar-right
 					li.active
-						a(href='') Home
-					li
-						a(href='') Test
+						a(ui-sref='main') Home
+					//- li
+					//- 	a(ui-sref='') Test
 
-		div.container-fluid(ng-controller='mainController')
-			block content
+		div(ui-view).container-fluid
+		//- (ng-controller='MainController')
+		//- 	block content
 
 	footer.navbar.navbar-inverse.navbar-fixed-bottom
 		div.container
