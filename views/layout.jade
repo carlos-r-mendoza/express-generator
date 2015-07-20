@@ -24,7 +24,7 @@ html(ng-app="ngMyApp")
 						//- adds padding for all the navigation links
 						//- styles li as links for navigation
 				ul.nav.navbar-nav.navbar-right
-					li.active
+					li(ng-class="{'home': 'active'}")
 						a(ui-sref='main') Home
 					li
 						a(ui-sref='posts') Posts Feed
@@ -35,4 +35,4 @@ html(ng-app="ngMyApp")
 
 	footer.navbar.navbar-inverse.navbar-fixed-bottom
 		div.container
-			p.text-center Footer Example
+			p.footer-text.text-center Footer Example

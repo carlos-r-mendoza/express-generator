@@ -61,3 +61,8 @@ dl {
 	height: 60px;
 	background-color: black;
 }
+
+.footer-text {
+	margin-top: 15px;
+	color: #ffffff;
+}
