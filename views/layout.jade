@@ -1,6 +1,5 @@
 doctype html
 html(ng-app="ngMyApp")
-	head
 		title= title
 		base(href="/")
 		//- Bootstrap css file
@@ -27,12 +26,12 @@ html(ng-app="ngMyApp")
 				ul.nav.navbar-nav.navbar-right
 					li.active
 						a(ui-sref='main') Home
-					//- li
-					//- 	a(ui-sref='') Test
+					li
+						a(ui-sref='posts') Posts Feed
 
-		div(ui-view).container-fluid
-		//- (ng-controller='MainController')
-		//- 	block content
+		div.container-fluid(ng-controller='MainController')
+
+		div(ui-view)
 
 	footer.navbar.navbar-inverse.navbar-fixed-bottom
 		div.container

@@ -1,26 +1,5 @@
 'use strict';
 
-var app = angular.module('ngMyApp', ['ui.router']);
-
-app.config(function ($locationProvider, $urlRouterProvider) {
-
-    $locationProvider.html5Mode(true);
-
-    $urlRouterProvider.otherwise('/');
-
-});
-
-
-
-app.config(function($stateProvider) {
-	$stateProvider
-		.state('main', {
-			url: '/',
-			templateUrl: '/index.html',
-			controller: 'MainController',
-		});
-});
-
 app.controller('MainController', ['$scope', 'Users', 'Posts', 'Comments', function($scope, Users, Posts, Comments){
 		
 		$scope.title = 'Sample Social Media Application Using Angular and Express!';
@@ -29,6 +8,11 @@ app.controller('MainController', ['$scope', 'Users', 'Posts', 'Comments', functi
 		Users.get()
 			.then(function(data){
 				$scope.users = data;
+			});
+
+		Posts.get()
+			.then(function(data){
+				$scope.all_posts = data;
 			});
 
 		//message displayed in profile/posts section when page is first loaded

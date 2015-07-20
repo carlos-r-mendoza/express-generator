@@ -1,0 +1,9 @@
+div.container.well
+	div.row
+		div.col-sm-12.col-md-12.col-lg-12
+			h1 Posts Feed
+	div.row
+		div.col-sm-12.col-md-12.col-lg-12
+			ul(ng-repeat='post in all_posts').list-unstyled 
+				li {{post.title}}
+				li {{post.body}}
