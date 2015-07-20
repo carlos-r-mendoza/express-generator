@@ -1,15 +1,23 @@
 'use strict';
 
-app.controller('MainController', ['$scope', 'Users', 'Posts', 'Comments', function($scope, Users, Posts, Comments){
+app.controller('MainController', ['$scope', 'Users', 'Posts', 'Comments', 'Tests', function($scope, Users, Posts, Comments, Tests){
 		
 		$scope.title = 'Sample Social Media Application Using Angular and Express!';
-			
+		
+		//get html from backend test
+		Tests.get()
+			.then(function(data) {
+				console.log('test data', data)
+				$scope.htmlcontent = data;
+			});		
+
 		//gets all users
 		Users.get()
 			.then(function(data){
 				$scope.users = data;
 			});
 
+		// gets all posts
 		Posts.get()
 			.then(function(data){
 				$scope.all_posts = data;

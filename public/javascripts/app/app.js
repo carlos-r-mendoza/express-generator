@@ -8,19 +8,22 @@ app.config(function ($locationProvider, $urlRouterProvider) {
 
 });
 
+// Defines our states
 app.config(function($stateProvider) {
 
 	$stateProvider
-		.state('main', {
+		.state('index', {
 			url: '/',
-			templateUrl: '/views/index.html',
+			templateUrl: '/views/index',
 			controller: 'MainController'
 		});
 
+
+	// posts views
 	$stateProvider
 		.state('posts', {
-			url: '/posts-feed',
-			templateUrl: '/views/posts_feed.html',
+			url: '/posts',
+			templateUrl: '/views/posts_feed',
 			controller: 'MainController'
 		});
 
