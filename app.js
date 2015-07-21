@@ -10,6 +10,33 @@ var users = require('./routes/users');
 
 var app = express();
 
+
+//****
+var session = require('express-session'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
+
+
+// var users = {
+//   carlos: {
+//     id: '1',
+//     password: '1234'
+//     },
+//   albert: {
+//     id:'2',
+//     password: 'abcd'
+//     },
+//   emmie: {
+//     id: '3',
+//     password: 'efgh'
+//     },
+//   nastia: {
+//     id: '4',
+//     password: '5678'
+//     }
+// }
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -21,6 +48,73 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//***** Step 1
+// auth configuration
+
+app.use(session({ secret: 'meanstackapp', 
+                  resave: false,
+                  saveUninitialized: false}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//telling passport how to attach a user to a session
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+//telling passport how to get an actual user from the session
+passport.deserializeUser(function(id, done) {
+    done(err, user);
+});
+
+
+
+passport.use(new LocalStrategy('local', function(username, password, done) {
+    console.log('backend auth', username, password)
+
+    var Users = [
+                  {username: 'carlos',
+                  id: '1', 
+                  password: '1234'},
+                  {username: 'emmie',
+                  id: '1', 
+                  password: '1234'},
+                  {username: 'nastia',
+                  id: '1', 
+                  password: '1234'},
+                  {username: 'albert',
+                  id: '1', 
+                  password: '1234'}
+              ];
+
+    for(var i = 0; i < Users.length; i++) {
+      console.log('inside loop', Users[i].username, Users[i].password)
+      if(Users[i].username === username) {
+        if(Users[i].password === password) {
+          return done(null, user);
+        } else {
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+      }
+    }
+
+    return done(null, false, { message: 'Incorrect username.' });
+
+
+    // User.findOne({ username: username }, function (err, user) {
+    //   if (err) { return done(err); }
+    //   if (!user) {
+    //     return done(null, false, { message: 'Incorrect username.' });
+    //   }
+    //   if (!user.validPassword(password)) {
+    //     return done(null, false, { message: 'Incorrect password.' });
+    //   }
+    //   return done(null, user);
+    // });
+  
+  }
+));
 
 app.use('/', routes);
 app.use('/users', users);

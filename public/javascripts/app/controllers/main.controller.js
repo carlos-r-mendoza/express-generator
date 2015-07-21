@@ -38,7 +38,7 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 			$scope.selected_user = user.name;
 
 			console.log('name', user.name)
-			$state.go('index.friend', { friendName: friendName});
+			//$state.go('index.friend', { friendName: friendName});
 		} 
 
 		//profile button logic
@@ -61,7 +61,7 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 				})
 
 			$scope.profile_posts = true;
-			$state.go('index.friend.posts');
+			// $state.go('index.friend.posts');
 
 
 		}

@@ -6,6 +6,15 @@ nav.navbar.navbar-inverse.navbar-fixed-top
 			a.navbar-brand(href='/') Sample Apps
 				//- adds padding for all the navigation links
 				//- styles li as links for navigation
+				//- form(method="post", ng-controller="AuthController", ng-submit="loginPost(login)")
+			form(action="/login", method="post")
+				div.form-group
+					input(type="text", placeholder="username", name="username")
+				//- input(type="text", placeholder="username", ng-model="login.username")
+				div.form-group
+					input(type="text", placeholder="password", name="password")
+				//- input(type="text", placeholder="password", ng-model='login.password')
+				input.btn.btn-success(type='submit' value='Submit')
 		ul.nav.navbar-nav.navbar-right
 			li(ng-class="{ active: navigation === 'Home' }", ng-click="navigation = 'Home'")
 				a(ui-sref='index') Home

@@ -73,3 +73,16 @@ app.factory('Comments', ['$http', 'APIConfig', function($http, APIConfig){
 		}
 	}
 }]);
+
+app.factory('Login', ['$http', function($http){
+	
+	return {
+		//gets all users		
+		post: function(credentials) {
+			return $http.post('/login', credentials)
+					.then(function(response){
+						return response.data;
+					})
+		}
+	};	
+}]);

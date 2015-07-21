@@ -20,13 +20,13 @@ app.config(function($stateProvider) {
 			templateUrl: '/views/index',
 			controller: 'MainController'
 		})
-		.state('index.friend', {
-			// url shows friends name
-			url: ':friendName'
-		})
-		.state('index.friend.posts', {
-			url: '/posts'
-		})
+		// .state('index.friend', {
+		// 	// url shows friends name
+		// 	url: ':friendName'
+		// })
+		// .state('index.friend.posts', {
+		// 	url: '/posts'
+		// })
 
 
 	// posts views
