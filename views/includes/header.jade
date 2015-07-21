@@ -1,0 +1,13 @@
+nav.navbar.navbar-inverse.navbar-fixed-top
+	//- centers container
+	div.container
+		div.navbar-header
+			//- position to the left of the page
+			a.navbar-brand(href='/') Sample Apps
+				//- adds padding for all the navigation links
+				//- styles li as links for navigation
+		ul.nav.navbar-nav.navbar-right
+			li(ng-class="{ active: navigation === 'Home' }", ng-click="navigation = 'Home'")
+				a(ui-sref='index') Home
+			li(ng-class="{ active: navigation === 'Posts Feed' }", ng-click="navigation='Posts Feed'")
+				a(ui-sref='posts-feed') Posts Feed

@@ -4,14 +4,17 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 		
 		$scope.title = 'Sample Social Media Application Using Angular and Express!';
 
+		//search friends
+		$scope.search = '';
+
+		//used to toggle ng-class in navigation bar
+		$scope.navigation = '';
+
 		//gets all users
 		Users.get()
 			.then(function(data){
 				$scope.users = data;
 			});
-
-		//search friends
-		$scope.search = '';
 
 		//message displayed in profile/posts section when page is first loaded
 		$scope.welcome_message = true;
