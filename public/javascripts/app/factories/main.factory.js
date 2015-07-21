@@ -1,9 +1,5 @@
 'use strict';
 
-
-
-
-
 app.factory('APIConfig', [function() {
 	
 	return {
@@ -21,20 +17,6 @@ app.factory('APIConfig', [function() {
 			}
 		}
 	}
-}]);
-
-app.factory('Tests', ['$http', function($http){
-	
-	return {
-		//gets all users		
-		get: function() {
-			return $http.get('/page')
-					.then(function(response){
-						console.log('inside test', response)
-						return response.data;
-					})
-		}
-	};	
 }]);
 
 app.factory('Users', ['$http', 'APIConfig', function($http, APIConfig){

@@ -25,12 +25,21 @@ dl {
 	margin-right: 5px !important;
 	float: right;
 	font-size: 10px;
-	padding: 3px 5px;	
 }
 
 .friend-name {
 	clear: both;
 	line-height: 2;
+	margin: 10px 0;
+}
+
+.friend-name-space {
+	padding: 10px 5px;
+}
+
+.friend_selected {
+	background-color: #cccccc;
+	border-radius: 5px;
 }
 
 .friend-details-section {
@@ -66,3 +75,4 @@ dl {
 	margin-top: 15px;
 	color: #ffffff;
 }
+
