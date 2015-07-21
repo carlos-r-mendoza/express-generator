@@ -10,6 +10,9 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 				$scope.users = data;
 			});
 
+		//search friends
+		$scope.search = '';
+
 		//message displayed in profile/posts section when page is first loaded
 		$scope.welcome_message = true;
 
