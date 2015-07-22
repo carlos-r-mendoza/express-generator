@@ -1,12 +1,14 @@
-	//- form(method="post", ng-controller="AuthController", ng-submit="loginPost(login)")
-form(action="/login", method="post")
-	div.form-group
-		input(type="text", placeholder="username", name="username")
-	//- input(type="text", placeholder="username", ng-model="login.username")
-	div.form-group
-		input(type="text", placeholder="password", name="password")
-	//- input(type="text", placeholder="password", ng-model='login.password')
-	input.btn.btn-success(type='submit' value='Submit')
-
-a(href="/auth/google/", target="_self")
-	button GOOGLE LOGIN
+div.row
+	div.col-sm-8.col-md-8.col-lg-8
+		form(action="/login", method="post")
+			div.form-group
+				label.white-label(for="userName") User Name
+				input.form-control(type="text", id="userName", placeholder="user name", name="username")
+			//- input(type="text", placeholder="username", ng-model="login.username")
+			div.form-group
+				label.white-label(for="userPassword") Password
+				input.form-control(type="text", id="userPassword", placeholder="password", name="password")
+			//- input(type="text", placeholder="password", ng-model='login.password')
+			input.btn.btn-success.btn-lg.btn.block(type="submit", value="Login")
+			a(href="/auth/google/", target="_self")
+				button.btn.btn-success.btn-lg.btn.block GOOGLE LOGIN

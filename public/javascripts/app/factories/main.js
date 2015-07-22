@@ -19,7 +19,7 @@ app.factory('APIConfig', [function() {
 	}
 }]);
 
-app.factory('Users', ['$http', 'APIConfig', function($http, APIConfig){
+app.factory('Users', ['$http', 'APIConfig', function($http, APIConfig) {
 	
 	return {
 		//gets all users		
@@ -32,7 +32,7 @@ app.factory('Users', ['$http', 'APIConfig', function($http, APIConfig){
 	};	
 }]);
 
-app.factory('Posts', ['$http', 'APIConfig', function($http, APIConfig){
+app.factory('Posts', ['$http', 'APIConfig', function($http, APIConfig) {
 	
 	return {
 		//gets all posts
@@ -54,7 +54,7 @@ app.factory('Posts', ['$http', 'APIConfig', function($http, APIConfig){
 	};
 }]);
 
-app.factory('Comments', ['$http', 'APIConfig', function($http, APIConfig){
+app.factory('Comments', ['$http', 'APIConfig', function($http, APIConfig) {
 	
 	return {
 		//gets all comments
@@ -74,15 +74,18 @@ app.factory('Comments', ['$http', 'APIConfig', function($http, APIConfig){
 	}
 }]);
 
-app.factory('Login', ['$http', function($http){
-	
+app.factory('Auth', ['$http', function($http) {
+
 	return {
-		//gets all users		
-		post: function(credentials) {
-			return $http.post('/login', credentials)
+		//gets current authenticated user's info
+		getUserInfo: function() {
+			return $http.get('/authenticatedUserInfo')
 					.then(function(response){
+						console.log('this is the authenticated', response)
 						return response.data;
-					})
+					});
 		}
-	};	
+	};
 }]);
+
+

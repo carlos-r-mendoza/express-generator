@@ -13,16 +13,11 @@ module.exports = function (app, session, passport) {
 
 	//telling passport how to attach a user to a session
 	passport.serializeUser(function(user, done) {
-	  done(null, user.id);
+	  done(null, user);
 	});
 
 	//telling passport how to get an actual user from the session
-	passport.deserializeUser(function(id, done) {
-	    console.log('desearializing', id)
-	    var user = {username: 'carlos',
-	                  id: '1', 
-	                  password: '1234'};  
-
+	passport.deserializeUser(function(user, done) { 
 	    done(null, user);
 	});
 

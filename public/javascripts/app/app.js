@@ -40,7 +40,7 @@ app.config(function($stateProvider) {
 	$stateProvider
 		.state('login-page', {
 			url: '/login-page',
-			templateUrl: '/views/login',
+			templateUrl: '/views/login'
 		});	
 
 });
