@@ -11,10 +11,11 @@ var users = require('./routes/users');
 var app = express();
 
 
-//****
 var session = require('express-session'),
     passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,36 +48,49 @@ passport.serializeUser(function(user, done) {
 
 //telling passport how to get an actual user from the session
 passport.deserializeUser(function(id, done) {
-    done(err, user);
+    console.log('desearializing', id)
+    var user = {username: 'carlos',
+                  id: '1', 
+                  password: '1234'};  
+
+    done(null, user);
 });
 
 
 //Authentication strategy configuration
 // By default, LocalStrategy expects to find credentials in parameters named username and password.
 passport.use(new LocalStrategy(function(username, password, done) {
-    console.log('backend auth', username, password)
 
-    var Users = [
+    var i,
+        Users = [
                   {username: 'carlos',
                   id: '1', 
                   password: '1234'},
                   {username: 'emmie',
-                  id: '1', 
+                  id: '2', 
                   password: '1234'},
                   {username: 'nastia',
-                  id: '1', 
+                  id: '3', 
                   password: '1234'},
                   {username: 'albert',
-                  id: '1', 
+                  id: '4', 
                   password: '1234'}
               ];
 
-    for(var i = 0; i < Users.length; i++) {
+    // var Users = {
+    //   carlos: {
+    //     id: 1,
+    //     password: '1234'
+    //   }
+    // }
+
+    for(i = 0; i < Users.length; i++) {
       console.log('inside loop', Users[i].username, Users[i].password)
       if(Users[i].username === username) {
         if(Users[i].password === password) {
           // if user authenticated
-          return done(null, user);
+          console.log('userssssss')
+          return done(null, Users[i]);
         } else {
 
           // if wrong password
@@ -88,20 +102,27 @@ passport.use(new LocalStrategy(function(username, password, done) {
     // if wrong username
     return done(null, false);
 
-
-    // User.findOne({ username: username }, function (err, user) {
-    //   if (err) { return done(err); }
-    //   if (!user) {
-    //     return done(null, false, { message: 'Incorrect username.' });
-    //   }
-    //   if (!user.validPassword(password)) {
-    //     return done(null, false, { message: 'Incorrect password.' });
-    //   }
-    //   return done(null, user);
-    // });
-  
   }
 ));
+
+passport.use(new GoogleStrategy({ 
+  clientID: '215286627926-o0tuifk9s7d5vvju1103f638ua81jgun.apps.googleusercontent.com',
+  clientSecret: 't-6fBgiuO-i-RJ8P_SNbIAxX',
+  callbackURL: 'https://localhost:3000/auth/google/callback' 
+  },
+  function (token, tokenSecret, profile, done) {
+    console.log('google profile', profile)
+    var user = {
+      profile: profile,
+      id: '5',
+      google: {
+        id: profile.id
+      }
+    };
+      
+    return done(null, user);
+   })
+);
 
 app.use('/', routes);
 app.use('/users', users);
