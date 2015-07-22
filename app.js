@@ -29,100 +29,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//***** Step 1
-// auth configuration
-
-// express session
-app.use(session({ secret: 'meanstackapp', 
-                  resave: false,
-                  saveUninitialized: false}));
-
-// passport session
-app.use(passport.initialize());
-app.use(passport.session());
-
-//telling passport how to attach a user to a session
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-//telling passport how to get an actual user from the session
-passport.deserializeUser(function(id, done) {
-    console.log('desearializing', id)
-    var user = {username: 'carlos',
-                  id: '1', 
-                  password: '1234'};  
-
-    done(null, user);
-});
-
+//Aut strategies
+require('./configure/authentication/index')(app, session, passport);
+require('./configure/authentication/local')(passport, LocalStrategy);
+require('./configure/authentication/google')(passport, GoogleStrategy);
 
 //Authentication strategy configuration
 // By default, LocalStrategy expects to find credentials in parameters named username and password.
-passport.use(new LocalStrategy(function(username, password, done) {
-
-    var i,
-        Users = [
-                  {username: 'carlos',
-                  id: '1', 
-                  password: '1234'},
-                  {username: 'emmie',
-                  id: '2', 
-                  password: '1234'},
-                  {username: 'nastia',
-                  id: '3', 
-                  password: '1234'},
-                  {username: 'albert',
-                  id: '4', 
-                  password: '1234'}
-              ];
-
-    // var Users = {
-    //   carlos: {
-    //     id: 1,
-    //     password: '1234'
-    //   }
-    // }
-
-    for(i = 0; i < Users.length; i++) {
-      console.log('inside loop', Users[i].username, Users[i].password)
-      if(Users[i].username === username) {
-        if(Users[i].password === password) {
-          // if user authenticated
-          console.log('userssssss')
-          return done(null, Users[i]);
-        } else {
-
-          // if wrong password
-          return done(null, false);
-        }
-      }
-    }
-
-    // if wrong username
-    return done(null, false);
-
-  }
-));
-
-passport.use(new GoogleStrategy({ 
-  clientID: '215286627926-o0tuifk9s7d5vvju1103f638ua81jgun.apps.googleusercontent.com',
-  clientSecret: 't-6fBgiuO-i-RJ8P_SNbIAxX',
-  callbackURL: 'https://localhost:3000/auth/google/callback' 
-  },
-  function (token, tokenSecret, profile, done) {
-    console.log('google profile', profile)
-    var user = {
-      profile: profile,
-      id: '5',
-      google: {
-        id: profile.id
-      }
-    };
-      
-    return done(null, user);
-   })
-);
 
 app.use('/', routes);
 app.use('/users', users);

@@ -8,7 +8,7 @@ var passport = require('passport');
 // })
 
 router.get('/views/login', function(req, res, next) {
-  res.render('login', req.user);
+  res.render('login');
 });
 
 router.get('/views/:page', function(req, res, next) {
@@ -33,10 +33,9 @@ router.get('/auth/google', passport.authenticate('google', {
 router.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login-page' }),
     function (req, res) {
+    	console.log('inside googled')
         res.redirect('/');
 });
-
-
 
 
 
