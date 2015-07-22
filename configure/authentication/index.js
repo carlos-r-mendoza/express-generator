@@ -1,9 +1,6 @@
 'use strict';
 
-var session = require('express-session'),
-    passport = require('passport');
-
-module.exports = function (app) {
+module.exports = function (app, session, passport) {
 
 	// express session
 	app.use(session({ secret: 'meanstackapp', 
@@ -19,9 +16,14 @@ module.exports = function (app) {
 	  done(null, user.id);
 	});
 
-	// telling passport how to get an actual user from the session
+	//telling passport how to get an actual user from the session
 	passport.deserializeUser(function(id, done) {
-	    done(err, user);
+	    console.log('desearializing', id)
+	    var user = {username: 'carlos',
+	                  id: '1', 
+	                  password: '1234'};  
+
+	    done(null, user);
 	});
 
 };
