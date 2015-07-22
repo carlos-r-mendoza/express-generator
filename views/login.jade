@@ -1,0 +1,9 @@
+	//- form(method="post", ng-controller="AuthController", ng-submit="loginPost(login)")
+form(action="/login", method="post")
+	div.form-group
+		input(type="text", placeholder="username", name="username")
+	//- input(type="text", placeholder="username", ng-model="login.username")
+	div.form-group
+		input(type="text", placeholder="password", name="password")
+	//- input(type="text", placeholder="password", ng-model='login.password')
+	input.btn.btn-success(type='submit' value='Submit')

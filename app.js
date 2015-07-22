@@ -16,27 +16,6 @@ var session = require('express-session'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 
-
-// var users = {
-//   carlos: {
-//     id: '1',
-//     password: '1234'
-//     },
-//   albert: {
-//     id:'2',
-//     password: 'abcd'
-//     },
-//   emmie: {
-//     id: '3',
-//     password: 'efgh'
-//     },
-//   nastia: {
-//     id: '4',
-//     password: '5678'
-//     }
-// }
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -52,9 +31,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 //***** Step 1
 // auth configuration
 
+// express session
 app.use(session({ secret: 'meanstackapp', 
                   resave: false,
                   saveUninitialized: false}));
+
+// passport session
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -69,8 +51,9 @@ passport.deserializeUser(function(id, done) {
 });
 
 
-
-passport.use(new LocalStrategy('local', function(username, password, done) {
+//Authentication strategy configuration
+// By default, LocalStrategy expects to find credentials in parameters named username and password.
+passport.use(new LocalStrategy(function(username, password, done) {
     console.log('backend auth', username, password)
 
     var Users = [
@@ -92,14 +75,18 @@ passport.use(new LocalStrategy('local', function(username, password, done) {
       console.log('inside loop', Users[i].username, Users[i].password)
       if(Users[i].username === username) {
         if(Users[i].password === password) {
+          // if user authenticated
           return done(null, user);
         } else {
-          return done(null, false, { message: 'Incorrect password.' });
+
+          // if wrong password
+          return done(null, false);
         }
       }
     }
 
-    return done(null, false, { message: 'Incorrect username.' });
+    // if wrong username
+    return done(null, false);
 
 
     // User.findOne({ username: username }, function (err, user) {
