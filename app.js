@@ -10,6 +10,12 @@ var users = require('./routes/users');
 
 var app = express();
 
+
+//****
+var session = require('express-session'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -21,6 +27,81 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//***** Step 1
+// auth configuration
+
+// express session
+app.use(session({ secret: 'meanstackapp', 
+                  resave: false,
+                  saveUninitialized: false}));
+
+// passport session
+app.use(passport.initialize());
+app.use(passport.session());
+
+//telling passport how to attach a user to a session
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+//telling passport how to get an actual user from the session
+passport.deserializeUser(function(id, done) {
+    done(err, user);
+});
+
+
+//Authentication strategy configuration
+// By default, LocalStrategy expects to find credentials in parameters named username and password.
+passport.use(new LocalStrategy(function(username, password, done) {
+    console.log('backend auth', username, password)
+
+    var Users = [
+                  {username: 'carlos',
+                  id: '1', 
+                  password: '1234'},
+                  {username: 'emmie',
+                  id: '1', 
+                  password: '1234'},
+                  {username: 'nastia',
+                  id: '1', 
+                  password: '1234'},
+                  {username: 'albert',
+                  id: '1', 
+                  password: '1234'}
+              ];
+
+    for(var i = 0; i < Users.length; i++) {
+      console.log('inside loop', Users[i].username, Users[i].password)
+      if(Users[i].username === username) {
+        if(Users[i].password === password) {
+          // if user authenticated
+          return done(null, user);
+        } else {
+
+          // if wrong password
+          return done(null, false);
+        }
+      }
+    }
+
+    // if wrong username
+    return done(null, false);
+
+
+    // User.findOne({ username: username }, function (err, user) {
+    //   if (err) { return done(err); }
+    //   if (!user) {
+    //     return done(null, false, { message: 'Incorrect username.' });
+    //   }
+    //   if (!user.validPassword(password)) {
+    //     return done(null, false, { message: 'Incorrect password.' });
+    //   }
+    //   return done(null, user);
+    // });
+  
+  }
+));
 
 app.use('/', routes);
 app.use('/users', users);

@@ -1,6 +1,6 @@
 doctype html
 html(ng-app="ngMyApp")
-		title= title
+		title= "My App"
 		base(href="/")
 		//- Bootstrap css file
 		link(rel='stylesheet', href='bootstrap-3.3.5-dist/css/bootstrap.css')
@@ -15,24 +15,11 @@ html(ng-app="ngMyApp")
 
 	body
 		
-		nav.navbar.navbar-inverse.navbar-fixed-top
-			//- centers container
-			div.container
-				div.navbar-header
-					//- position to the left of the page
-					a.navbar-brand(href='/') Sample Apps
-						//- adds padding for all the navigation links
-						//- styles li as links for navigation
-				ul.nav.navbar-nav.navbar-right
-					li.active
-						a(ui-sref='main') Home
-					li
-						a(ui-sref='posts') Posts Feed
+		include ./includes/header
 
-		div.container-fluid(ng-controller='MainController')
+		div.container-fluid
+			//- block content
 
-		div(ui-view)
+			div(ui-view)
 
-	footer.navbar.navbar-inverse.navbar-fixed-bottom
-		div.container
-			p.text-center Footer Example
+		include ./includes/footer

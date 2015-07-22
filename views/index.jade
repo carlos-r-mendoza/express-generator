@@ -1,59 +1,60 @@
-extends layout
-
-block content
-	div.row
-		h2.well.text-center.col-sm-12.col-md-12.col-lg-12 {{title}}
-	div.row
-		div.well.col-sm-3.col-md-3.col-lg-3
-			h4.text-center Friends List
-			hr
-			div.bg-info.friends-list-section
-				div.friend-name(ng-repeat="user in users")
+div.row
+	h2.well.text-center.col-sm-12.col-md-12.col-lg-12 {{title}}
+div.row
+	div.well.col-sm-3.col-md-3.col-lg-3
+		h4.text-center Friends List
+		hr
+		div.bg-info.friends-list-section
+			form
+				div.form-group
+					input.form-control(type="text", placeholder="Search Friends...", ng-model="search")
+			div.friend-name(ng-repeat="user in users | filter:search", ng-class="{ friend_selected: user.name === selected_user }")
+				div.friend-name-space
 					strong {{user.name}}
 					button.btn.btn-primary(ng-click="toggleProfile(user)") View Profile
-		div.well.friend-details-section.col-sm-8.col-sm-offset-1.col-md-8.col-md-offset-1.col-lg-8.col-md-offset-1
-				div(ng-show="welcome_message")
-					p Welcome! Click on a friend to see their profile details!!
-				div.btn-group.btn-profile-posts(role="group", aria-label="...", ng-hide="welcome_message")
-					button.btn.btn-default(type="button", ng-click="showUserProfile()") Profile
-					button.btn.btn-default(type="button", ng-click="showUserPosts()") Posts
-				h4.name-title.pull-right {{user_details.name}}
-				hr		
-				div(ng-show="profile_details")
+	div.well.friend-details-section.col-sm-8.col-sm-offset-1.col-md-8.col-md-offset-1.col-lg-8.col-md-offset-1
+			div(ng-show="welcome_message")
+				p Welcome! Click on a friend to see their profile details!!
+			div.btn-group.btn-profile-posts(role="group", aria-label="...", ng-hide="welcome_message")
+				button.btn.btn-default(type="button", ng-click="showUserProfile()") Profile
+				button.btn.btn-default(type="button", ng-click="showUserPosts()") Posts
+			h4.name-title.pull-right {{user_details.name}}
+			hr		
+			div(ng-show="profile_details")
+				p 
+					strong Name: 
+					| {{user_details.name}}
+				p 
+					strong Username: 
+					| {{user_details.username}}
+				p 
+					strong Email: 
+					| {{user_details.email}}
+				p 
+					strong Address: 
+					| {{user_details.address.street}}, {{user_details.address.city}}, {{user_details.address.zipcode}} 
+				p 
+					strong Phone: 
+					| {{user_details.phone}}
+				p 
+					strong Website: 
+					| {{user_details.website}}
+				p 
+					strong Company: 
+					| {{user_details.company.name}},
+					em {{user_details.company.catchPhrase}}, {{user_details.company.bs}}
+			ul.list-unstyled.user-posts(ng-show="profile_posts", ng-repeat="post in user_posts")
+				li 
+					strong {{post.title}}
+				li {{post.body}} 
+					a(href="", ng-click="togglePostComments(post); show_post_comments = !show_post_comments") 
+						span(ng-hide="show_post_comments") (see comments)
+						span(ng-show="show_post_comments") (hide comments)
+				blockquote(ng-if="show_post_comments", ng-repeat="comment in post.comments")
 					p 
-						strong Name: 
-						| {{user_details.name}}
-					p 
-						strong Username: 
-						| {{user_details.username}}
-					p 
-						strong Email: 
-						| {{user_details.email}}
-					p 
-						strong Address: 
-						| {{user_details.address.street}}, {{user_details.address.city}}, {{user_details.address.zipcode}} 
-					p 
-						strong Phone: 
-						| {{user_details.phone}}
-					p 
-						strong Website: 
-						| {{user_details.website}}
-					p 
-						strong Company: 
-						| {{user_details.company.name}},
-						em {{user_details.company.catchPhrase}}, {{user_details.company.bs}}
-				ul.list-unstyled.user-posts(ng-show="profile_posts", ng-repeat="post in user_posts")
-					li 
-						strong {{post.title}}
-					li {{post.body}} 
-						a(href="", ng-click="togglePostComments(post); show_post_comments = !show_post_comments") 
-							span(ng-hide="show_post_comments") (see comments)
-							span(ng-show="show_post_comments") (hide comments)
-					blockquote(ng-if="show_post_comments", ng-repeat="comment in post.comments")
-						p 
-							strong {{comment.name}}
-						p {{comment.body}}
-						footer {{comment.email}}
+						strong {{comment.name}}
+					p {{comment.body}}
+					footer {{comment.email}}
 				
 
 

@@ -13,19 +13,19 @@ module.exports = function(grunt){
 			}
 
 		},
-		jade: {
-			compile: {
-				options: {
-					data: {
-						debug: false
-					}
-				},
-				files: {
-					'public/views/posts_feed.html': ['views/posts_feed.jade'],
-					'public/views/index.html': ['views/index.jade']
-				}
-			}
-		},
+		// jade: {
+		// 	compile: {
+		// 		options: {
+		// 			data: {
+		// 				debug: false
+		// 			}
+		// 		},
+		// 		files: {
+		// 			'public/views/posts_feed.html': ['views/posts_feed.jade'],
+		// 			'public/views/index.html': ['views/index.jade']
+		// 		}
+		// 	}
+		// },
 		// uglify:{
 		// 	, //gives access to information in package.json
 		// 	dist:{
@@ -39,11 +39,11 @@ module.exports = function(grunt){
     	}
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-jade');
+	//grunt.loadNpmTasks('grunt-contrib-jade');
 
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	// grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('default', ['concat', 'jade', 'watch']);
+	grunt.registerTask('default', ['concat', 'watch']);
 };
