@@ -1,14 +1,23 @@
 'use strict';
 
-app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comments', function($scope, $state, Users, Posts, Comments){
+app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comments', 'Auth', '$rootScope', function($scope, $state, Users, Posts, Comments, Auth, $rootScope) {
 		
-		$scope.title = 'Sample Social Media Application Using Angular and Express!';
-
 		//search friends
 		$scope.search = '';
 
 		//used to toggle ng-class in navigation bar
 		$scope.navigation = '';
+
+		Auth.getUserInfo()
+			.then(function(data){
+				console.log('ad', data)
+				$scope.current_user = data;
+				$scope.title = 'Welcome ' + $scope.current_user.username + '!';
+				$rootScope.showLogoutBtn = true;
+				console.log(data.photos[0].value)
+				$rootScope.current_user_pic = data.photos[0].value;
+			})
+
 
 		//gets all users
 		Users.get()

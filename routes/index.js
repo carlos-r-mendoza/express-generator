@@ -19,9 +19,18 @@ router.get('/views/:page', function(req, res, next) {
   }
 });
 
+router.get('/authenticatedUserInfo', function(req, res, next){
+	res.json(req.user);
+})
+
 router.post('/login', passport.authenticate('local', { successRedirect: '/',
                                    						failureRedirect: '/login-page' })
 );
+
+router.get('/logout', function(req, res, next) {
+	req.logout();
+	res.status(200).redirect('/');
+});
 
 router.get('/auth/google', passport.authenticate('google', {
     scope: [
@@ -33,7 +42,6 @@ router.get('/auth/google', passport.authenticate('google', {
 router.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login-page' }),
     function (req, res) {
-    	console.log('inside googled')
         res.redirect('/');
 });
 

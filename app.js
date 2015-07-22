@@ -10,7 +10,7 @@ var users = require('./routes/users');
 
 var app = express();
 
-
+// Auth modules
 var session = require('express-session'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
@@ -29,13 +29,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Aut strategies
+// Auth strategies
 require('./configure/authentication/index')(app, session, passport);
 require('./configure/authentication/local')(passport, LocalStrategy);
 require('./configure/authentication/google')(passport, GoogleStrategy);
-
-//Authentication strategy configuration
-// By default, LocalStrategy expects to find credentials in parameters named username and password.
 
 app.use('/', routes);
 app.use('/users', users);

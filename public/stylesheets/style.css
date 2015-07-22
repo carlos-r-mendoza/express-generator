@@ -2,6 +2,8 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url('/images/background-image2.jpg');
+  background-repeat: none  background-attachment: fixed;
+  background-size: cover;
 }
 
 a {
@@ -74,5 +76,10 @@ dl {
 .footer-text {
 	margin-top: 15px;
 	color: #ffffff;
+}
+
+.white-label {
+	color: #ffffff;
+	font-size: 24px;
 }
 
