@@ -1,6 +1,6 @@
 div.container
-	form.form-horizontal.white-font(action="/create-account/billing-info", method="post", name="userIncomeForm", ng-submit="userInfoForm.$valid", novalidate)
-		h2.text-center Income Information
+	form.form-horizontal.white-font(action="/create-account/billing-info", method="post", name="userInfoForm", ng-submit="userInfoForm.$valid", novalidate)
+		h2.text-center Contact Information
 		div.form-group
 			label.col-sm-2.control-label(for="userFirstName") First Name:
 			div.col-sm-4
@@ -36,3 +36,7 @@ div.container
 			div.col-sm-2
 				input.form-control(type="number", id="userZip", placeholder="ZipCode")
 		input.btn.btn-warning.pull-right(type="submit", value="Continue")
+		//- input(type="submit", value="Submit")
+	//- {{userInfoForm.$valid}}
+	//- ng-pristine -> ng-dirty
+	//- ng-invalid -> ng-valid

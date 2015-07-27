@@ -19,7 +19,7 @@ div.container
 			hr.vertical-rule
 		div.col-sm-5.col-md-5.col-lg-5
 			h1.text-center.white-font.account-heading CREATE ACCOUNT
-			form(action="/login", method="post")
+			form(action="/create-account/user-info", method="post")
 				div.form-group
 					label.white-label(for="userName") User Name
 					input.form-control(type="text", id="userName", placeholder="user name", name="username")
@@ -32,4 +32,4 @@ div.container
 					label.white-label(for="userPassword") Confirm Password
 					input.form-control(type="text", id="userPassword", placeholder="password", name="password")
 				//- input(type="text", placeholder="password", ng-model='login.password')
-				input.btn.btn-warning.btn-lg.btn.block(type="submit", value="Continue")
+				input.btn.btn-warning.btn-lg(type="submit", value="Continue")

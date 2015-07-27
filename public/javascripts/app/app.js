@@ -43,4 +43,21 @@ app.config(function($stateProvider) {
 			templateUrl: '/views/login'
 		});	
 
+
+	// create account states
+	$stateProvider
+		.state('user-info', {
+			url: '/create-account/user-info',
+			templateUrl: '/create-account/user-info',
+			controller: 'CreateAccountController'
+		})
+		.state('income-info', {
+			url: '/create-account/income-info',
+			templateUrl: '/create-account/income-info'
+		})
+		.state('billing-info', {
+			url: '/create-account/billing-info',
+			templateUrl: '/create-account/billing-info'
+		});
+
 });
