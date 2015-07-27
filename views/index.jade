@@ -11,7 +11,7 @@ div.row
 			div.friend-name(ng-repeat="user in users | filter:search", ng-class="{ friend_selected: user.name === selected_user }")
 				div.friend-name-space
 					strong {{user.name}}
-					button.btn.btn-primary(ng-click="toggleProfile(user)") View Profile
+					button.btn.btn-primary.btn-profile(ng-click="toggleProfile(user)") View Profile
 	div.well.friend-details-section.col-sm-8.col-sm-offset-1.col-md-8.col-md-offset-1.col-lg-8.col-md-offset-1
 			div(ng-show="welcome_message")
 				p Welcome! Click on a friend to see their profile details!!

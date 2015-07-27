@@ -23,7 +23,7 @@ dl {
 	border-radius: 4px;
 }
 
-.btn-primary {
+.btn-profile {
 	margin-right: 5px !important;
 	float: right;
 	font-size: 10px;
@@ -78,8 +78,32 @@ dl {
 	color: #ffffff;
 }
 
+/* LOGIN PAGE */
+
 .white-label {
 	color: #ffffff;
 	font-size: 24px;
 }
 
+.white-font {
+	color: #ffffff;
+}
+
+.account-heading {
+	padding-top: 20px;
+	margin-bottom: 50px;
+}
+
+.vertical-rule {
+	height: 460px;
+	width:1px;
+	border:1px inset #ffffff;
+	margin:5px;
+	margin: 20px auto;
+}
+
+.or-text {
+	color: #ffffff;
+	margin-left: 10px;
+	margin-right: 10px;
+}
