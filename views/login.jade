@@ -1,14 +1,35 @@
-div.row
-	div.col-sm-8.col-md-8.col-lg-8
-		form(action="/login", method="post")
-			div.form-group
-				label.white-label(for="userName") User Name
-				input.form-control(type="text", id="userName", placeholder="user name", name="username")
-			//- input(type="text", placeholder="username", ng-model="login.username")
-			div.form-group
-				label.white-label(for="userPassword") Password
-				input.form-control(type="text", id="userPassword", placeholder="password", name="password")
-			//- input(type="text", placeholder="password", ng-model='login.password')
-			input.btn.btn-success.btn-lg.btn.block(type="submit", value="Login")
-			a(href="/auth/google/", target="_self")
-				button.btn.btn-success.btn-lg.btn.block GOOGLE LOGIN
+div.container
+	div.row
+		div.col-sm-5.col-md-5.col-lg-5
+			h1.text-center.white-font.account-heading LOGIN
+			form(action="/login", method="post")
+				div.form-group
+					label.white-label(for="userName") User Name
+					input.form-control(type="text", id="userName", placeholder="user name", name="username")
+				//- input(type="text", placeholder="username", ng-model="login.username")
+				div.form-group
+					label.white-label(for="userPassword") Password
+					input.form-control(type="text", id="userPassword", placeholder="password", name="password")
+				//- input(type="text", placeholder="password", ng-model='login.password')
+				input.btn.btn-success.btn-lg.btn.block(type="submit", value="Login")
+				span.or-text OR
+				a(href="/auth/google/", target="_self")
+					button.btn.btn-danger.btn-lg.btn.block Login with Google+
+		div.col-sm-2.col-md-2.col-lg-2
+			hr.vertical-rule
+		div.col-sm-5.col-md-5.col-lg-5
+			h1.text-center.white-font.account-heading CREATE ACCOUNT
+			form(action="/create-account/user-info", method="post")
+				div.form-group
+					label.white-label(for="userName") User Name
+					input.form-control(type="text", id="userName", placeholder="user name", name="username")
+				//- input(type="text", placeholder="username", ng-model="login.username")
+				div.form-group
+					label.white-label(for="userPassword") Password
+					input.form-control(type="text", id="userPassword", placeholder="password", name="password")
+				//- input(type="text", placeholder="password", ng-model='login.password')
+				div.form-group
+					label.white-label(for="userPassword") Confirm Password
+					input.form-control(type="text", id="userPassword", placeholder="password", name="password")
+				//- input(type="text", placeholder="password", ng-model='login.password')
+				input.btn.btn-warning.btn-lg(type="submit", value="Continue")

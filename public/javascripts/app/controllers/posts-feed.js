@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('PostsFeedController', ['$scope', '$state', 'Posts', function($scope, $state, Posts){
+app.controller('PostsFeedController', ['$scope', 'Posts', function($scope, Posts){
 		
 		Posts.get()
 			.then(function(data){

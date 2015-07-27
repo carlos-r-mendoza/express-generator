@@ -19,6 +19,8 @@ router.get('/views/:page', function(req, res, next) {
   }
 });
 
+// Authentication Routes
+
 router.get('/authenticatedUserInfo', function(req, res, next){
 	res.json(req.user);
 })
@@ -43,6 +45,13 @@ router.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login-page' }),
     function (req, res) {
         res.redirect('/');
+});
+
+// Create Account Routes
+  // serves create account pages
+router.get('/create-account/:page', function(req, res, next) {
+  console.log("creating account")
+  res.render('forms/' + req.params.page);
 });
 
 
