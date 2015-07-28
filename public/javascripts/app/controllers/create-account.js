@@ -6,24 +6,27 @@ app.controller('CreateAccountController', ['$scope', '$state', 'NewUser', functi
 	$scope.newUser = NewUser.create();
 
 	// invalid password message
+	$scope.userNameUnavailable = false;
 	$scope.passwordLengthMessage = true;
-	$scope.passwordMessage = null;
 	$scope.passwordNotMatchingMessage = false;
 
 	// saves user
 	$scope.saveUser = function(newUser) {
-		NewUser.update(newUser);
-
-		// password matching validator
-		if(newUser.password === newUser.confirmPassword) {
-			//$state.go('user-info');
-		} else {
-			$scope.passwordMessage = "Your passwords must match."
-		}
-
 		// check for username availability
-		NewUser.verifyUsername(newUser.username);
-
+		NewUser.verifyUsername(newUser.username)
+			.then(function(data){
+				if (data.message === 'failed') {
+					// username unavailable
+					console.log('failed')
+					$scope.userNameUnavailable = true;
+				} else if (data.message === 'success' && newUser.password === newUser.confirmPassword) {
+					// username available
+					// update user in NewUser factory
+					NewUser.update(newUser);
+					// go to next step/state
+					$state.go('user-info');
+				}
+			})
 	};
 
 	// watch password matching

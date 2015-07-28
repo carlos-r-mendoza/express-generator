@@ -23,6 +23,7 @@ div.container
 				div.form-group
 					label.white-label(for="userName") User Name
 						span.asterik-red  *
+						span.smaller-font(ng-show="userNameUnavailable") (username already exists)
 					input.form-control(type="text", id="userName", placeholder="user name", name="username", ng-model="newUser.username", required)
 				//- input(type="text", placeholder="username", ng-model="login.username")
 				div.form-group
