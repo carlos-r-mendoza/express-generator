@@ -28,12 +28,13 @@ div.container
 				div.form-group
 					label.white-label(for="userPassword") Password
 						span.asterik-red  *
-						span.smaller-font (password must be at least 5 characters)
+						span.smaller-font(ng-show="passwordLengthMessage") (password must be at least 5 characters)
 					input.form-control(type="password", id="userPassword", placeholder="password", ng-model="newUser.password" name="password", required, ng-minlength="5")
 				//- input(type="text", placeholder="password", ng-model='login.password')
 				div.form-group
 					label.white-label(for="userPassword") Confirm Password
 						span.asterik-red  *
+						span.smaller-font(ng-show="passwordNotMatchingMessage") (passwords do not match)
 					input.form-control(type="password", id="userPassword", placeholder="password", ng-model="newUser.confirmPassword", name="confirmPassword", required, ng-minlength="5")
 				//- input(type="text", placeholder="password", ng-model='login.password')
 				input.btn.btn-warning.btn-lg(type="submit", value="Continue")

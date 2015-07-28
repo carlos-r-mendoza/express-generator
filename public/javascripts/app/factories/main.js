@@ -195,6 +195,14 @@ app.factory('NewUser', ['$http', function($http) {
 
 			console.log("factory user", user);
 		},
+		// checks to see if username is available
+		verifyUsername: function(username) {
+			$http.post('/verify-username', { username: username })
+				.then(function(response) {
+					console.log('username verification', response)
+					return response.data;
+				})
+		},
 		verifyIncome: function(assets) {
 			$http.post('/verify-income', { assets: assets })
 				.then(function(response) {
