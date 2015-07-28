@@ -6,20 +6,47 @@ app.controller('CreateAccountController', ['$scope', '$state', 'NewUser', functi
 	$scope.newUser = NewUser.create();
 
 	// invalid password message
-	$scope.passwordMessage = null;
+	$scope.userNameUnavailable = false;
+	$scope.passwordLengthMessage = true;
+	$scope.passwordNotMatchingMessage = false;
 
 	// saves user
 	$scope.saveUser = function(newUser) {
-		NewUser.update(newUser);
+		// check for username availability
+		NewUser.verifyUsername(newUser.username)
+			.then(function(data){
+				if (data.message === 'failed') {
+					// username unavailable
+					console.log('failed')
+					$scope.userNameUnavailable = true;
+				} else if (data.message === 'success' && newUser.password === newUser.confirmPassword) {
+					// username available
+					// update user in NewUser factory
+					NewUser.update(newUser);
+					// go to next step/state
+					$state.go('user-info');
+				}
+			})
+	};
 
-		// password matching validator
-		if(newUser.password === newUser.confirmPassword) {
-			$state.go('user-info');
+	// watch password matching
+	$scope.$watchCollection('newUser', function(new_val, old_val) {
+
+		if(new_val.password >= 5) {
+			$scope.passwordLengthMessage = false;
+		} else { $scope.passwordLengthMessage = true; }
+
+		if(new_val.confirmPassword && new_val.confirmPassword.length >= 5) {
+			if(new_val.confirmPassword === new_val.password) {
+				$scope.passwordNotMatchingMessage = false;
+			} else { $scope.passwordNotMatchingMessage = true; }
 		} else {
-			$scope.passwordMessage = "Your passwords must match."
+			$scope.passwordNotMatchingMessage = false;
 		}
 
-	};
+	});
+
+
 
 
 }]);

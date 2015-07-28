@@ -192,13 +192,18 @@ app.factory('NewUser', ['$http', function($http) {
 		update: function(newUser) {
 			user.username = newUser.username;
 			user.password = newUser.password;
-
-			console.log("factory user", user);
 		},
-		verifyIncome: function(assets) {
-			$http.post('/verify-income', { assets: assets })
+		// checks to see if username is available
+		verifyUsername: function(username) {
+			return $http.post('/verify-username', { username: username })
 				.then(function(response) {
-					console.log("response", response)
+					return response.data;
+				})
+		},
+		// checks to see if income is eligible
+		verifyIncome: function(assets) {
+			return $http.post('/verify-income', { assets: assets })
+				.then(function(response) {
 					return response.data;
 				}); 
 		}
