@@ -49,11 +49,12 @@ app.config(function($stateProvider) {
 		.state('user-info', {
 			url: '/create-account/user-info',
 			templateUrl: '/create-account/user-info',
-			controller: 'CreateAccountController'
+			controller: 'UserInfoController'
 		})
 		.state('income-info', {
 			url: '/create-account/income-info',
-			templateUrl: '/create-account/income-info'
+			templateUrl: '/create-account/income-info',
+			controller: 'UserIncomeController'
 		})
 		.state('billing-info', {
 			url: '/create-account/billing-info',

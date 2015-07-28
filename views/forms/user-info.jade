@@ -1,40 +1,41 @@
 div.container
-	form.form-horizontal.white-font(action="/create-account/billing-info", method="post", name="userInfoForm", ng-submit="userInfoForm.$valid", novalidate)
-		h2.text-center Contact Information
+	form.form-horizontal.white-font(method="post", name="userInfoForm", ng-submit="userInfoForm.$valid && saveUser(newUser)", novalidate)
+		h2.text-center Contact Information for {{newUser.username}}
 		div.form-group
-			label.col-sm-2.control-label(for="userFirstName") First Name:
+			label.col-sm-2.control-label(for="userFirstName") First Name: *
 			div.col-sm-4
-				input.form-control(type="text", id="userFirstName", placeholder="First Name")
-			label.col-sm-2.control-label(for="userLastName") Last Name:
+				input.form-control(type="text", id="userFirstName", ng-model="newUser.firstName", placeholder="First Name", required)
+			label.col-sm-2.control-label(for="userLastName") Last Name: *
 			div.col-sm-4
-				input.form-control(type="text", id="userLastName", placeholder="Last Name")
+				input.form-control(type="text", id="userLastName", , ng-model="newUser.lastName", placeholder="Last Name", required)
 		div.form-group
-			label.col-sm-2.control-label(for="userPhone") Phone Number:
+			label.col-sm-2.control-label(for="userPhone") Phone Number: 
 			div.col-sm-4
-				input.form-control(type="number", id="userPhone", placeholder="Phone Number")
-			label.col-sm-2.control-label(for="userEmail") Email:
+				input.form-control(type="number", id="userPhone", , ng-model="newUser.phone", placeholder="Phone Number")
+			label.col-sm-2.control-label(for="userEmail") Email: *
 			div.col-sm-4
-				input.form-control(type="email", id="userEmail", placeholder="Email")
+				input.form-control(type="email", id="userEmail", , ng-model="newUser.email", placeholder="Email", required)
 		h2.text-center Address
 		div.form-group
 			label.col-sm-2.control-label(for="userAddress1") Address 1
 			div.col-sm-10
-				input.form-control(type="text", id="userAddress1", placeholder="Address 1")
+				input.form-control(type="text", id="userAddress1", ng-model="newUser.address.address1", placeholder="Address 1")
 		div.form-group
 			label.col-sm-2.control-label(for="userAddress2") Address 2
 			div.col-sm-10
-				input.form-control(type="text", id="userAddress2", placeholder="Address 2")
+				input.form-control(type="text", id="userAddress2", ng-model="newUser.address.address2", placeholder="Address 2")
 		div.form-group
-			label.col-sm-2.control-label(for="userCity") City
+			label.col-sm-2.control-label(for="userCity") City *
 			div.col-sm-2
-				input.form-control(type="text", id="userCity", placeholder="City")
-			label.col-sm-2.control-label(for="userState") State
+				input.form-control(type="text", id="userCity", ng-model="newUser.address.state", placeholder="City", required)
+			label.col-sm-2.control-label(for="userState") State *
 			div.col-sm-2
-				select.form-control(required)
-					option(ng-repeat="state in states", id="userState", value="state") {{state}}
-			label.col-sm-2.control-label(for="userZip") ZipCode
+				select.form-control
+					option(ng-repeat="state in states", id="userState", ng-model="newUser.address.zipCode", value="state") {{state}}
+			label.col-sm-2.control-label(for="userZip") ZipCode *
 			div.col-sm-2
-				input.form-control(type="number", id="userZip", placeholder="ZipCode")
+				input.form-control(type="number", id="userZip", placeholder="ZipCode", required)
+				p.white-font {{invalidZip}}
 		input.btn.btn-warning.pull-right(type="submit", value="Continue")
 		//- input(type="submit", value="Submit")
 	//- {{userInfoForm.$valid}}
