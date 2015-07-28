@@ -157,6 +157,7 @@ app.factory('NewUser', ['$http', function($http) {
 	var user = {
 		username: null,
 		password: null,
+		id: null,
 		firstName: null,
 		lastName: null,
 		phone: null,
@@ -178,7 +179,8 @@ app.factory('NewUser', ['$http', function($http) {
 			lastName: null,
 			phone: null,
 			email: null
-		}
+		},
+		accountApproved: false
 	};
 
 	return {

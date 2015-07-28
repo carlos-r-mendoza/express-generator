@@ -7,13 +7,6 @@ module.exports = function(passport, LocalStrategy) {
 
 	    var i;
 
-	    // var Users = {
-	    //   carlos: {
-	    //     id: 1,
-	    //     password: '1234'
-	    //   }
-	    // }
-
 	    for(i = 0; i < Users.length; i++) {
 	      console.log('inside loop', Users[i].username, Users[i].password)
 	      if(Users[i].username === username) {

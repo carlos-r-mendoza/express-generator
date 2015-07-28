@@ -59,6 +59,8 @@ router.post('/verify-username', function(req, res, next){
   fs.readFile('./configure/authentication/user-data.json', {encoding: 'utf8'}, function(err, data){
     if (err) throw err;
     var all_users_info = JSON.parse(data);
+    // id for new save if necessary
+    var id = all_users_info[all_users_info.length-1].id + 1;
 
     // check to see if username is available
     for(var i = 0; i < all_users_info.length; i++) {
@@ -66,11 +68,32 @@ router.post('/verify-username', function(req, res, next){
         res.json(failed).end();
         break;
       } else if (i === all_users_info.length-1) {
+        req.body.id = id;
+        all_users_info.push(req.body)
+        saveUser(JSON.stringify(all_users_info, null, 2))
         res.json(success).end();
+        break;
       }
     }
 
+  // save user function
+  function saveUser(data) {
+    fs.writeFile('./configure/authentication/user-data.json', data, {encoding: 'utf8'}, function(err) {
+      if (err) throw err;
+      console.log('User data updated!');
+    });
+  }
+
   });
+
+
+  // function saveUser(data) {
+  //   fs.writeFile('./configure/authentication/user-data.json', data, {encoding: 'utf8'}, function(err) {
+  //     if (err) throw err;
+  //     console.log('User data updated!');
+  //      res.json(success).end();
+  //   });
+  // }
 
 });
 
