@@ -54,6 +54,17 @@ router.get('/create-account/:page', function(req, res, next) {
   res.render('forms/' + req.params.page);
 });
 
+  // verifies user's assets is > 20k
+    // if less than 20k, account cannot be opened
+router.post('/verify-income', function(req, res, next){
+
+  if(req.body.assets < 20000) {
+    res.json({ message: 'Sorry. We cannot approve your account.'})
+  }
+
+
+});
+
 
 
 module.exports = router;

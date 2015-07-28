@@ -97,6 +97,7 @@ app.factory('States', [function() {
 		'CA - California',
 		'CO - Colorado',
 		'CT - Connecticut',
+		'DC - The District of Columbia',
 		'DE - Delaware',
 		'FL - Florida',
 		'GA - Georgia',
@@ -147,6 +148,60 @@ app.factory('States', [function() {
 			return states;
 		}
 
+	}
+
+}]);
+
+app.factory('NewUser', ['$http', function($http) {
+
+	var user = {
+		username: null,
+		password: null,
+		firstName: null,
+		lastName: null,
+		phone: null,
+		email: null,
+		address: {
+			address1: null,
+			address2: null,
+			city: null,
+			state: null,
+			zipCode: null
+		},
+		income: {
+			salary: null,
+			checking: null,
+			savings: null
+		},
+		cosigner: {
+			firstName: null,
+			lastName: null,
+			phone: null,
+			email: null
+		}
+	};
+
+	return {
+
+		get: function() {
+			return user;
+		},
+		create: function() {
+			return user;
+		},
+		update: function(newUser) {
+			user.username = newUser.username;
+			user.password = newUser.password;
+
+			console.log("factory user", user);
+		},
+		verifyIncome: function(assets) {
+			$http.post('/verify-income', { assets: assets })
+				.then(function(response) {
+					console.log("response", response)
+					return response.data;
+				}); 
+		}
 	}
 
 }]);

@@ -1,38 +1,42 @@
 div.container
-	form.form-horizontal.white-font(action="/create-account/billing-info", method="post", name="userIncomeForm", ng-submit="userInfoForm.$valid", novalidate)
+	form.form-horizontal.white-font(method="post", name="userIncomeForm", ng-submit="userIncomeForm.$valid && saveUser(newUser)", novalidate)
 		h2.text-center Income Information
 		div.form-group
-			label.col-sm-2.control-label(for="userFirstName") First Name:
-			div.col-sm-4
-				input.form-control(type="text", id="userFirstName", placeholder="First Name")
-			label.col-sm-2.control-label(for="userLastName") Last Name:
-			div.col-sm-4
-				input.form-control(type="text", id="userLastName", placeholder="Last Name")
+			label.col-sm-2.control-label(for="userSalary") Annual Salary: *
+			div.col-sm-4.input-group
+				div.input-group-addon $
+				input.form-control(type="number", id="userSalary", ng-model="newUser.income.salary", placeholder="Annual Salary", required)
+				div.input-group-addon .00
 		div.form-group
-			label.col-sm-2.control-label(for="userPhone") Phone Number:
-			div.col-sm-4
-				input.form-control(type="number", id="userPhone", placeholder="Phone Number")
-			label.col-sm-2.control-label(for="userEmail") Email:
-			div.col-sm-4
-				input.form-control(type="email", id="userEmail", placeholder="Email")
-		h2.text-center Address
+			label.col-sm-2.control-label(for="userCheckingAcct") Checking Account Amount: *
+			div.col-sm-4.input-group
+				div.input-group-addon $
+				input.form-control(type="number", id="userCheckingAcct", ng-model="newUser.income.checking", placeholder="Checking Account Amount", required)
+				div.input-group-addon .00
 		div.form-group
-			label.col-sm-2.control-label(for="userAddress1") Address 1
-			div.col-sm-10
-				input.form-control(type="text", id="userAddress1", placeholder="Address 1")
-		div.form-group
-			label.col-sm-2.control-label(for="userAddress2") Address 2
-			div.col-sm-10
-				input.form-control(type="text", id="userAddress2", placeholder="Address 2")
-		div.form-group
-			label.col-sm-2.control-label(for="userCity") City
-			div.col-sm-2
-				input.form-control(type="text", id="userCity", placeholder="City")
-			label.col-sm-2.control-label(for="userState") State
-			div.col-sm-2
-				select.form-control(required)
-					option(ng-repeat="state in states", id="userState", value="state") {{state}}
-			label.col-sm-2.control-label(for="userZip") ZipCode
-			div.col-sm-2
-				input.form-control(type="number", id="userZip", placeholder="ZipCode")
+			label.col-sm-2.control-label(for="userSavingsAcct") Checking Account Amount: *
+			div.col-sm-4.input-group
+				div.input-group-addon $
+				input.form-control(type="number", id="userSavingsAcct", ng-model="newUser.income.savings", placeholder="Savings Account Amount", required)
+				div.input-group-addon .00
 		input.btn.btn-warning.pull-right(type="submit", value="Continue")
+
+	p(ng-show="showCosignerMessage") {{showCosignerMessage}}
+
+div(ng-if="requireCosigner")
+	form.form-horizontal.white-font(action="/create-account/billing-info", method="post", name="userInfoForm", ng-submit="userInfoForm.$valid", novalidate)
+		h2.text-center Co-Signer Information
+		div.form-group
+			label.col-sm-2.control-label(for="userFirstName") First Name: *
+			div.col-sm-4
+				input.form-control(type="text", id="userFirstName", ng-model="newUser.cosigner.firstName", placeholder="First Name", required)
+			label.col-sm-2.control-label(for="userLastName") Last Name: *
+			div.col-sm-4
+				input.form-control(type="text", id="userLastName", ng-model="newUser.cosigner.lastName", placeholder="Last Name", required)
+		div.form-group
+			label.col-sm-2.control-label(for="userPhone") Phone Number: *
+			div.col-sm-4
+				input.form-control(type="number", id="userPhone", ng-model="newUser.cosigner.phone", placeholder="Phone Number", required)
+			label.col-sm-2.control-label(for="userEmail") Email: *
+			div.col-sm-4
+				input.form-control(type="email", id="userEmail", ng-model="newUser.cosigner.email", placeholder="Email", required)

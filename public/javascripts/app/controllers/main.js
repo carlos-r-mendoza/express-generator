@@ -14,8 +14,8 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 				$scope.current_user = data;
 				$scope.title = 'Welcome ' + $scope.current_user.username + '!';
 				$rootScope.showLogoutBtn = true;
-				console.log(data.photos[0].value)
-				$rootScope.current_user_pic = data.photos[0].value;
+				// console.log(data.photos[0].value)
+				// $rootScope.current_user_pic = data.photos[0].value;
 			})
 
 

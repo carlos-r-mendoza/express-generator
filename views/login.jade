@@ -9,7 +9,7 @@ div.container
 				//- input(type="text", placeholder="username", ng-model="login.username")
 				div.form-group
 					label.white-label(for="userPassword") Password
-					input.form-control(type="text", id="userPassword", placeholder="password", name="password")
+					input.form-control(type="password", id="userPassword", placeholder="password", name="password")
 				//- input(type="text", placeholder="password", ng-model='login.password')
 				input.btn.btn-success.btn-lg.btn.block(type="submit", value="Login")
 				span.or-text OR
@@ -17,19 +17,24 @@ div.container
 					button.btn.btn-danger.btn-lg.btn.block Login with Google+
 		div.col-sm-2.col-md-2.col-lg-2
 			hr.vertical-rule
-		div.col-sm-5.col-md-5.col-lg-5
+		div.col-sm-5.col-md-5.col-lg-5(ng-controller="CreateAccountController")
 			h1.text-center.white-font.account-heading CREATE ACCOUNT
-			form(action="/create-account/user-info", method="post")
+			form(name="createAccountForm", method="post", ng-submit="createAccountForm.$valid && saveUser(newUser)", novalidate)
 				div.form-group
 					label.white-label(for="userName") User Name
-					input.form-control(type="text", id="userName", placeholder="user name", name="username")
+						span.asterik-red  *
+					input.form-control(type="text", id="userName", placeholder="user name", name="username", ng-model="newUser.username", required)
 				//- input(type="text", placeholder="username", ng-model="login.username")
 				div.form-group
 					label.white-label(for="userPassword") Password
-					input.form-control(type="text", id="userPassword", placeholder="password", name="password")
+						span.asterik-red  *
+						span.smaller-font (password must be at least 5 characters)
+					input.form-control(type="password", id="userPassword", placeholder="password", ng-model="newUser.password" name="password", required, ng-minlength="5")
 				//- input(type="text", placeholder="password", ng-model='login.password')
 				div.form-group
 					label.white-label(for="userPassword") Confirm Password
-					input.form-control(type="text", id="userPassword", placeholder="password", name="password")
+						span.asterik-red  *
+					input.form-control(type="password", id="userPassword", placeholder="password", ng-model="newUser.confirmPassword", name="confirmPassword", required, ng-minlength="5")
 				//- input(type="text", placeholder="password", ng-model='login.password')
 				input.btn.btn-warning.btn-lg(type="submit", value="Continue")
+			p.white-font {{passwordMessage}}

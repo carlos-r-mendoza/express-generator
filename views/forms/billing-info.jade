@@ -1,38 +1,7 @@
-div.container
-	form.form-horizontal.white-font(action="/create-account/billing-info", method="post", name="userInfoForm", ng-submit="userInfoForm.$valid", novalidate)
-		h2.text-center Contact Information
-		div.form-group
-			label.col-sm-2.control-label(for="userFirstName") First Name:
-			div.col-sm-4
-				input.form-control(type="text", id="userFirstName", placeholder="First Name")
-			label.col-sm-2.control-label(for="userLastName") Last Name:
-			div.col-sm-4
-				input.form-control(type="text", id="userLastName", placeholder="Last Name")
-		div.form-group
-			label.col-sm-2.control-label(for="userPhone") Phone Number:
-			div.col-sm-4
-				input.form-control(type="number", id="userPhone", placeholder="Phone Number")
-			label.col-sm-2.control-label(for="userEmail") Email:
-			div.col-sm-4
-				input.form-control(type="email", id="userEmail", placeholder="Email")
-		h2.text-center Address
-		div.form-group
-			label.col-sm-2.control-label(for="userAddress1") Address 1
-			div.col-sm-10
-				input.form-control(type="text", id="userAddress1", placeholder="Address 1")
-		div.form-group
-			label.col-sm-2.control-label(for="userAddress2") Address 2
-			div.col-sm-10
-				input.form-control(type="text", id="userAddress2", placeholder="Address 2")
-		div.form-group
-			label.col-sm-2.control-label(for="userCity") City
-			div.col-sm-2
-				input.form-control(type="text", id="userCity", placeholder="City")
-			label.col-sm-2.control-label(for="userState") State
-			div.col-sm-2
-				select.form-control(required)
-					option(ng-repeat="state in states", id="userState", value="state") {{state}}
-			label.col-sm-2.control-label(for="userZip") ZipCode
-			div.col-sm-2
-				input.form-control(type="number", id="userZip", placeholder="ZipCode")
-		input.btn.btn-warning.pull-right(type="submit", value="Continue")
+div.white-font
+	label.checkbox-inline
+		input(type="radio", name="billingAddressRadio", id="billingAddressYes") 
+		| YES
+	label.checkbox-inline
+		input(type="radio", name="billingAddressRadio", id="billingAddressNo") 
+		| NO
