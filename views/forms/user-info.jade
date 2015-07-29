@@ -25,16 +25,17 @@ div.container
 			div.col-sm-10
 				input.form-control(type="text", id="userAddress2", ng-model="newUser.address.address2", placeholder="Address 2")
 		div.form-group
-			label.col-sm-2.control-label(for="userCity") City *
+			label.col-sm-2.control-label(for="stateCities") City *
 			div.col-sm-2
-				input.form-control(type="text", id="userCity", ng-model="newUser.address.state", placeholder="City", required)
+				select.form-control(id="stateCities", ng-model="newUser.address.city", ng-disabled="!newUser.address.state")
+					option(ng-repeat="city in stateCities track by myTrackingFunction(city)", ng-selected="$index === 0", value="{{city}}") {{city}}
 			label.col-sm-2.control-label(for="userState") State *
 			div.col-sm-2
-				select.form-control
-					option(ng-repeat="state in states", id="userState", ng-model="newUser.address.zipCode", value="state") {{state}}
+				select.form-control(id="userState", ng-model="newUser.address.state", ng-change="getCities(newUser.address.state)")
+					option(ng-repeat="state in states", value="{{state}}") {{state}}
 			label.col-sm-2.control-label(for="userZip") ZipCode *
 			div.col-sm-2
-				input.form-control(type="number", id="userZip", placeholder="ZipCode", required)
+				input.form-control(type="number", id="userZip", placeholder="ZipCode", ng-model="newUser.address.zipCode", required)
 				p.white-font {{invalidZip}}
 		input.btn.btn-warning.pull-right(type="submit", value="Continue")
 		//- input(type="submit", value="Submit")

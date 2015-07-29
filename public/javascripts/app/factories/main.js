@@ -88,7 +88,7 @@ app.factory('Auth', ['$http', function($http) {
 	};
 }]);
 
-app.factory('States', [function() {
+app.factory('States', ['$http', function($http) {
 
 	var states = ['AL - Alabama',
 		'AK - Alaska',
@@ -97,7 +97,7 @@ app.factory('States', [function() {
 		'CA - California',
 		'CO - Colorado',
 		'CT - Connecticut',
-		'DC - The District of Columbia',
+		'DC - District of Columbia',
 		'DE - Delaware',
 		'FL - Florida',
 		'GA - Georgia',
@@ -113,6 +113,7 @@ app.factory('States', [function() {
 		'MD - Maryland',
 		'MA - Massachusetts',
 		'MI - Michigan',
+		'MN - Minnesota',
 		'MS - Mississippi',
 		'MO - Missouri',
 		'MT - Montana',
@@ -144,8 +145,13 @@ app.factory('States', [function() {
 	return {
 
 		get: function() {
-			console.log('here', states)
 			return states;
+		},
+		getCitiesOfState: function(stateName) {
+			return $http.get('/get-cities-in-state/' + stateName)
+				.then(function(response){
+					return response.data;
+				});
 		}
 
 	}
@@ -201,6 +207,15 @@ app.factory('NewUser', ['$http', function($http) {
 				.then(function(response) {
 					return response.data;
 				})
+		},
+		// validates user's address 
+		verifyAddress: function() {
+			console.log('getting address')
+			var zipCodeAPIKey = '1yGOCOmoHawwHk1q2FZZ0rltzQzbEmyFVftx3QVL0shINi8PY8PYzas801kEoSkj'
+			return $http.get('https://www.zipcodeapi.com/rest/' + zipCodeAPIKey + '/info.jsonp/11106/degrees')
+				.then(function(response) {
+					console.log('api response', response)
+				});
 		},
 		// checks to see if income is eligible
 		verifyIncome: function(assets) {

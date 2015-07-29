@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var http = require('http');
 var fs = require('fs');
 
 // messages to send back
 var success = { message: 'success' };
-var failed = { message: 'failed' };
+var failed = { message: 'failed' }; // revise
 
 /* GET page. */
 // router.get('/', function(req, res, next){
@@ -56,7 +57,7 @@ router.get('/auth/google/callback',
   // serves create account pages
 router.post('/verify-username', function(req, res, next){
 
-  fs.readFile('./configure/authentication/user-data.json', {encoding: 'utf8'}, function(err, data){
+  fs.readFile('./configure/authentication/user-data.json', {encoding: 'utf8'}, function(err, data) {
     if (err) throw err;
     var all_users_info = JSON.parse(data);
     // id for new save if necessary
@@ -97,6 +98,11 @@ router.post('/verify-username', function(req, res, next){
 
 });
 
+// router.get('/verify-zipcode', function(req, res, next) {
+//   var zipCodeAPIKey = '1yGOCOmoHawwHk1q2FZZ0rltzQzbEmyFVftx3QVL0shINi8PY8PYzas801kEoSkj';
+//   'https://www.zipcodeapi.com/rest/' + zipCodeAPIKey + '/info.jsonp/11106/degrees'
+
+// });
 
 router.get('/create-account/:page', function(req, res, next) {
   console.log("creating account")
@@ -111,6 +117,22 @@ router.post('/verify-income', function(req, res, next){
     res.json({ message: 'Sorry. We cannot approve your account.'})
   }
 
+});
+
+router.get('/get-cities-in-state/:stateName', function(req, res, next){
+
+  fs.readFile('./data/us-cities-by-state.json', {encoding: 'utf8'}, function(err, data) {
+    if(err) throw err;
+
+    // converst json to js 
+    var states_and_cities = JSON.parse(data);
+
+    // contains state's cities
+    var cities = states_and_cities[req.params.stateName].cities;
+
+    res.json({ cities: cities })
+  
+  });
 
 });
 
