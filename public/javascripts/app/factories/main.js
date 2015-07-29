@@ -152,6 +152,12 @@ app.factory('States', ['$http', function($http) {
 				.then(function(response){
 					return response.data;
 				});
+		},
+		verifyZipCode: function(zipCode) {
+			return $http.get('/verify-zipcode/' + zipCode)
+				.then(function(response){
+					return response.data;
+				});
 		}
 
 	}
@@ -207,15 +213,6 @@ app.factory('NewUser', ['$http', function($http) {
 				.then(function(response) {
 					return response.data;
 				})
-		},
-		// validates user's address 
-		verifyAddress: function() {
-			console.log('getting address')
-			var zipCodeAPIKey = '1yGOCOmoHawwHk1q2FZZ0rltzQzbEmyFVftx3QVL0shINi8PY8PYzas801kEoSkj'
-			return $http.get('https://www.zipcodeapi.com/rest/' + zipCodeAPIKey + '/info.jsonp/11106/degrees')
-				.then(function(response) {
-					console.log('api response', response)
-				});
 		},
 		// checks to see if income is eligible
 		verifyIncome: function(assets) {

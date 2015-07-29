@@ -48,6 +48,31 @@ app.controller('UserInfoController', ['$scope', '$state', 'States', 'NewUser', f
 		return city.id = cityIdCounter += 1;
 	}
 
+	// verify zipCode based on city & state
+	$scope.verifyZipCode = function() {
+		var city_info;
+
+		if ($scope.newUser.address.city && 
+			$scope.newUser.address.zipCode && 
+			$scope.newUser.address.zipCode.toString().length === 5) {
+
+			States.verifyZipCode($scope.newUser.address.zipCode)
+				.then(function(data){
+					city_info = JSON.parse(data);
+
+					if(data.message) {
+
+					} else if($scope.newUser.address.city === city_info.city) {
+						
+					} else {
+
+					}
+				});
+
+		}
+	
+	};
+
 
 
 }]);

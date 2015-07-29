@@ -28,14 +28,14 @@ div.container
 			label.col-sm-2.control-label(for="stateCities") City *
 			div.col-sm-2
 				select.form-control(id="stateCities", ng-model="newUser.address.city", ng-disabled="!newUser.address.state")
-					option(ng-repeat="city in stateCities track by myTrackingFunction(city)", ng-selected="$index === 0", value="{{city}}") {{city}}
+					option(ng-repeat="city in stateCities track by myTrackingFunction(city)", value="{{city}}") {{city}}
 			label.col-sm-2.control-label(for="userState") State *
 			div.col-sm-2
 				select.form-control(id="userState", ng-model="newUser.address.state", ng-change="getCities(newUser.address.state)")
 					option(ng-repeat="state in states", value="{{state}}") {{state}}
 			label.col-sm-2.control-label(for="userZip") ZipCode *
 			div.col-sm-2
-				input.form-control(type="number", id="userZip", placeholder="ZipCode", ng-model="newUser.address.zipCode", required)
+				input.form-control(type="number", id="userZip", placeholder="ZipCode", ng-model="newUser.address.zipCode", ng-change="verifyZipCode()" required)
 				p.white-font {{invalidZip}}
 		input.btn.btn-warning.pull-right(type="submit", value="Continue")
 		//- input(type="submit", value="Submit")
