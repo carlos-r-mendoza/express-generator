@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var http = require('http');
 var fs = require('fs');
 
 // messages to send back
 var success = { message: 'success' };
-var failed = { message: 'failed' };
+var failed = { message: 'failed' }; // revise
 
 /* GET page. */
 // router.get('/', function(req, res, next){
@@ -97,6 +98,11 @@ router.post('/verify-username', function(req, res, next){
 
 });
 
+// router.get('/verify-zipcode', function(req, res, next) {
+//   var zipCodeAPIKey = '1yGOCOmoHawwHk1q2FZZ0rltzQzbEmyFVftx3QVL0shINi8PY8PYzas801kEoSkj';
+//   'https://www.zipcodeapi.com/rest/' + zipCodeAPIKey + '/info.jsonp/11106/degrees'
+
+// });
 
 router.get('/create-account/:page', function(req, res, next) {
   console.log("creating account")

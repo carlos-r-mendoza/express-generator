@@ -2,6 +2,13 @@
 
 app.controller('UserInfoController', ['$scope', '$state', 'States', 'NewUser', function($scope, $state, States, NewUser) {
 
+
+
+	// NewUser.verifyAddress()	
+	// 	.then(function(data){
+	// 		console.log('this is it', data);
+	// 	})
+
 	// populats states in form
 	$scope.states = States.get();
 	// gets new user object to pass from state to state
@@ -21,5 +28,13 @@ app.controller('UserInfoController', ['$scope', '$state', 'States', 'NewUser', f
 		}
 
 	};
+
+	// get state's cities
+	$scope.getStateCities = function(state) {
+		var stateName = state.split(" - ")[1]
+		console.log('changing', stateName)
+	}
+
+
 
 }]);
