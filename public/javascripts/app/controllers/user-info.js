@@ -40,6 +40,12 @@ app.controller('UserInfoController', ['$scope', '$state', 'States', 'NewUser', f
 				$scope.stateCities = data.cities;
 			});
 
+	};
+
+	// custom track by function for city ng-repeat
+	var cityIdCounter = 0;
+	$scope.myTrackingFunction = function(city) {
+		return city.id = cityIdCounter += 1;
 	}
 
 
