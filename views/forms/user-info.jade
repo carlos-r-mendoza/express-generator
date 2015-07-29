@@ -1,5 +1,5 @@
 div.container
-	form.form-horizontal.white-font(method="post", name="userInfoForm", ng-submit="userInfoForm.$valid && saveUser(newUser)", novalidate)
+	form.form-horizontal.white-font(method="post", name="userInfoForm", ng-submit="userInfoForm.$valid && addressValid && saveUser(newUser)", novalidate)
 		h2.text-center Contact Information for {{newUser.username}}
 		div.form-group
 			label.col-sm-2.control-label(for="userFirstName") First Name: *
@@ -28,15 +28,16 @@ div.container
 			label.col-sm-2.control-label(for="stateCities") City *
 			div.col-sm-2
 				select.form-control(id="stateCities", ng-model="newUser.address.city", ng-disabled="!newUser.address.state")
-					option(ng-repeat="city in stateCities track by myTrackingFunction(city)", ng-selected="$index === 0", value="{{city}}") {{city}}
+					option(ng-repeat="city in stateCities track by myTrackingFunction(city)", value="{{city}}") {{city}}
 			label.col-sm-2.control-label(for="userState") State *
 			div.col-sm-2
 				select.form-control(id="userState", ng-model="newUser.address.state", ng-change="getCities(newUser.address.state)")
 					option(ng-repeat="state in states", value="{{state}}") {{state}}
 			label.col-sm-2.control-label(for="userZip") ZipCode *
 			div.col-sm-2
-				input.form-control(type="number", id="userZip", placeholder="ZipCode", ng-model="newUser.address.zipCode", required)
-				p.white-font {{invalidZip}}
+				input.form-control(type="number", id="userZip", placeholder="ZipCode", ng-model="newUser.address.zipCode", ng-change="verifyZipCode()", ng-disabled="!newUser.address.city", required)
+				p(ng-if="zipCodeNotValidMessage").white-font ZipCode does not exists.
+				p(ng-if="ZipCodeDoesNotMatchMessage").white-font ZipCode does not match address.
 		input.btn.btn-warning.pull-right(type="submit", value="Continue")
 		//- input(type="submit", value="Submit")
 	//- {{userInfoForm.$valid}}

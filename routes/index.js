@@ -3,10 +3,14 @@ var router = express.Router();
 var passport = require('passport');
 var http = require('http');
 var fs = require('fs');
+var request = require('request');
 
 // messages to send back
 var success = { message: 'success' };
 var failed = { message: 'failed' }; // revise
+
+// zipCodeAPIKey
+var zipCodeAPIKey = require('../configure/zip-code-api-key');
 
 /* GET page. */
 // router.get('/', function(req, res, next){
@@ -135,6 +139,26 @@ router.get('/get-cities-in-state/:stateName', function(req, res, next){
   });
 
 });
+
+router.get('/verify-zipcode/:zipcode', function(req, res, next){
+
+  var request_url = 'https://www.zipcodeapi.com/rest/' + zipCodeAPIKey + '/info.json/' + req.params.zipcode + '/degrees';
+
+  request(request_url, function(error, response, body) {
+
+    var zip_info = JSON.parse(body);
+
+    if(zip_info.error_code) {
+      res.json(failed);
+    } else {
+      res.json(body);
+    }
+
+    console.log('this is the response', body)
+  });
+
+});
+
 
 
 

@@ -48,6 +48,38 @@ app.controller('UserInfoController', ['$scope', '$state', 'States', 'NewUser', f
 		return city.id = cityIdCounter += 1;
 	}
 
+	// verify zipCode based on city & state
+	$scope.verifyZipCode = function() {
+
+		if ($scope.newUser.address.city && 
+			$scope.newUser.address.zipCode && 
+			$scope.newUser.address.zipCode.toString().length === 5) {
+
+			States.verifyZipCode($scope.newUser.address.zipCode)
+				.then(function(data){
+
+					if(data.message) {
+						console.log('error');
+						$scope.addressValid = false;
+						$scope.zipCodeNotValidMessage = true;
+						$scope.ZipCodeDoesNotMatchMessage = false;
+					} else if($scope.newUser.address.state.split(" - ")[0] === JSON.parse(data).state) {
+						$scope.addressValid = true;
+						$scope.zipCodeNotValidMessage = false;
+						$scope.ZipCodeDoesNotMatchMessage = false;
+						console.log('true');
+					} else {
+						$scope.addressValid = false;
+						$scope.zipCodeNotValidMessage = false;
+						$scope.ZipCodeDoesNotMatchMessage = true;
+						console.log('false');
+					}
+				});
+
+		}
+	
+	};
+
 
 
 }]);
