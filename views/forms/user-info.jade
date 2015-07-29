@@ -30,7 +30,7 @@ div.container
 				input.form-control(type="text", id="userCity", ng-model="newUser.address.city", placeholder="City", required)
 			label.col-sm-2.control-label(for="userState") State *
 			div.col-sm-2
-				select.form-control(id="userState", ng-model="newUser.address.state", ng-change="getStateCities(newUser.address.state)")
+				select.form-control(id="userState", ng-model="newUser.address.state", ng-change="getCities(newUser.address.state)")
 					option(value="", selected) -------
 					option(ng-repeat="state in states", value="{{state}}") {{state}}
 			label.col-sm-2.control-label(for="userZip") ZipCode *

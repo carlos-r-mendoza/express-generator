@@ -15,6 +15,8 @@ app.controller('UserInfoController', ['$scope', '$state', 'States', 'NewUser', f
 	$scope.newUser = NewUser.get();
 	// invalid zip code message
 	$scope.invalidZip = "Sorry, that's an invalid ZipCode."
+	// sets cities to empty array on initialization 
+	$scope.stateCities = [];
 
 	// saves user
 	$scope.saveUser = function(newUser) {
@@ -30,9 +32,14 @@ app.controller('UserInfoController', ['$scope', '$state', 'States', 'NewUser', f
 	};
 
 	// get state's cities
-	$scope.getStateCities = function(state) {
-		var stateName = state.split(" - ")[1]
-		console.log('changing', stateName)
+	$scope.getCities = function(state) {
+		var stateName = state.split(" - ")[1];
+
+		States.getCitiesOfState(stateName)
+			.then(function(data){
+				$scope.stateCities = data.cities;
+			});
+
 	}
 
 

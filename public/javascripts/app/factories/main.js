@@ -88,7 +88,7 @@ app.factory('Auth', ['$http', function($http) {
 	};
 }]);
 
-app.factory('States', [function() {
+app.factory('States', ['$http', function($http) {
 
 	var states = ['AL - Alabama',
 		'AK - Alaska',
@@ -145,8 +145,13 @@ app.factory('States', [function() {
 	return {
 
 		get: function() {
-			console.log('here', states)
 			return states;
+		},
+		getCitiesOfState: function(stateName) {
+			return $http.get('/get-cities-in-state/' + stateName)
+				.then(function(response){
+					return response.data;
+				});
 		}
 
 	}

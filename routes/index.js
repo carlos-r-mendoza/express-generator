@@ -57,7 +57,7 @@ router.get('/auth/google/callback',
   // serves create account pages
 router.post('/verify-username', function(req, res, next){
 
-  fs.readFile('./configure/authentication/user-data.json', {encoding: 'utf8'}, function(err, data){
+  fs.readFile('./configure/authentication/user-data.json', {encoding: 'utf8'}, function(err, data) {
     if (err) throw err;
     var all_users_info = JSON.parse(data);
     // id for new save if necessary
@@ -117,6 +117,22 @@ router.post('/verify-income', function(req, res, next){
     res.json({ message: 'Sorry. We cannot approve your account.'})
   }
 
+});
+
+router.get('/get-cities-in-state/:stateName', function(req, res, next){
+
+  fs.readFile('./data/us-cities-by-state.json', {encoding: 'utf8'}, function(err, data) {
+    if(err) throw err;
+
+    // converst json to js 
+    var states_and_cities = JSON.parse(data);
+
+    // contains state's cities
+    var cities = states_and_cities[req.params.stateName].cities;
+
+    res.json({ cities: cities })
+  
+  });
 
 });
 
