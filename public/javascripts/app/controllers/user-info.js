@@ -50,7 +50,6 @@ app.controller('UserInfoController', ['$scope', '$state', 'States', 'NewUser', f
 
 	// verify zipCode based on city & state
 	$scope.verifyZipCode = function() {
-		var city_info;
 
 		if ($scope.newUser.address.city && 
 			$scope.newUser.address.zipCode && 
@@ -58,14 +57,22 @@ app.controller('UserInfoController', ['$scope', '$state', 'States', 'NewUser', f
 
 			States.verifyZipCode($scope.newUser.address.zipCode)
 				.then(function(data){
-					city_info = JSON.parse(data);
 
 					if(data.message) {
-
-					} else if($scope.newUser.address.city === city_info.city) {
-						
+						console.log('error');
+						$scope.addressValid = false;
+						$scope.zipCodeNotValidMessage = true;
+						$scope.ZipCodeDoesNotMatchMessage = false;
+					} else if($scope.newUser.address.state.split(" - ")[0] === JSON.parse(data).state) {
+						$scope.addressValid = true;
+						$scope.zipCodeNotValidMessage = false;
+						$scope.ZipCodeDoesNotMatchMessage = false;
+						console.log('true');
 					} else {
-
+						$scope.addressValid = false;
+						$scope.zipCodeNotValidMessage = false;
+						$scope.ZipCodeDoesNotMatchMessage = true;
+						console.log('false');
 					}
 				});
 
