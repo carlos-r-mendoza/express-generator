@@ -35,7 +35,11 @@ app.config(function($stateProvider) {
 			url: '/posts-feed',
 			templateUrl: '/views/posts-feed',
 			controller: 'PostsFeedController'
-		});
+		})
+		.state('to-do', {
+			url: '/do-do',
+			templateUrl: '/views/to-do',
+		})
 
 	$stateProvider
 		.state('login-page', {

@@ -18,6 +18,8 @@ div.row
 			div.btn-group.btn-profile-posts(role="group", aria-label="...", ng-hide="welcome_message")
 				button.btn.btn-default(type="button", ng-click="showUserProfile()") Profile
 				button.btn.btn-default(type="button", ng-click="showUserPosts()") Posts
+				a(ui-sref="to-do")
+					button.btn.btn-default(type="button") To Do
 			h4.name-title.pull-right {{user_details.name}}
 			hr		
 			div(ng-show="profile_details")

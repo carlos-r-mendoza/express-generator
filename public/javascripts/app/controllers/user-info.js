@@ -17,6 +17,9 @@ app.controller('UserInfoController', ['$scope', '$state', 'States', 'NewUser', f
 	$scope.invalidZip = "Sorry, that's an invalid ZipCode."
 	// sets cities to empty array on initialization 
 	$scope.stateCities = [];
+	// progress bar
+	$scope.progress = 33;
+	$scope.stepNumber = 1;
 
 	// saves user
 	$scope.saveUser = function(newUser) {

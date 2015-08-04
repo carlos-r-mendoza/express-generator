@@ -1,44 +1,64 @@
 div.container
-	form.form-horizontal.white-font(method="post", name="userInfoForm", ng-submit="userInfoForm.$valid && addressValid && saveUser(newUser)", novalidate)
-		h2.text-center Contact Information for {{newUser.username}}
-		div.form-group
-			label.col-sm-2.control-label(for="userFirstName") First Name: *
-			div.col-sm-4
-				input.form-control(type="text", id="userFirstName", ng-model="newUser.firstName", placeholder="First Name", required)
-			label.col-sm-2.control-label(for="userLastName") Last Name: *
-			div.col-sm-4
-				input.form-control(type="text", id="userLastName", , ng-model="newUser.lastName", placeholder="Last Name", required)
-		div.form-group
-			label.col-sm-2.control-label(for="userPhone") Phone Number: 
-			div.col-sm-4
-				input.form-control(type="number", id="userPhone", , ng-model="newUser.phone", placeholder="Phone Number")
-			label.col-sm-2.control-label(for="userEmail") Email: *
-			div.col-sm-4
-				input.form-control(type="email", id="userEmail", , ng-model="newUser.email", placeholder="Email", required)
-		h2.text-center Address
-		div.form-group
-			label.col-sm-2.control-label(for="userAddress1") Address 1
-			div.col-sm-10
-				input.form-control(type="text", id="userAddress1", ng-model="newUser.address.address1", placeholder="Address 1")
-		div.form-group
-			label.col-sm-2.control-label(for="userAddress2") Address 2
-			div.col-sm-10
-				input.form-control(type="text", id="userAddress2", ng-model="newUser.address.address2", placeholder="Address 2")
-		div.form-group
-			label.col-sm-2.control-label(for="stateCities") City *
-			div.col-sm-2
-				select.form-control(id="stateCities", ng-model="newUser.address.city", ng-disabled="!newUser.address.state")
-					option(ng-repeat="city in stateCities track by myTrackingFunction(city)", value="{{city}}") {{city}}
-			label.col-sm-2.control-label(for="userState") State *
-			div.col-sm-2
-				select.form-control(id="userState", ng-model="newUser.address.state", ng-change="getCities(newUser.address.state)")
-					option(ng-repeat="state in states", value="{{state}}") {{state}}
-			label.col-sm-2.control-label(for="userZip") ZipCode *
-			div.col-sm-2
-				input.form-control(type="number", id="userZip", placeholder="ZipCode", ng-model="newUser.address.zipCode", ng-change="verifyZipCode()", ng-disabled="!newUser.address.city", required)
-				p(ng-if="zipCodeNotValidMessage").white-font ZipCode does not exists.
-				p(ng-if="ZipCodeDoesNotMatchMessage").white-font ZipCode does not match address.
-		input.btn.btn-warning.pull-right(type="submit", value="Continue")
+	include ../includes/progress-bar
+	div.page-header.custom-page-header.white-font
+		h1 Contact Information for {{newUser.username}}
+	div.well.well-lg.custom-well.center-block
+		form.form-horizontal(method="post", name="userInfoForm", ng-submit="userInfoForm.$valid && addressValid && saveUser(newUser)", novalidate)
+			div.form.group
+				div.col-sm-12.bg-info.custom-bg-info.text-right
+					h4.bg-info-title User
+			div.form-group
+				label.col-sm-2.col-sm-2-custom-width.control-label(for="userFirstName") First Name: 
+					span.asterik-red-regular *
+				div.col-sm-4.col-sm-4-custom-width
+					input.form-control(type="text", id="userFirstName", ng-model="newUser.firstName", placeholder="First Name", required)
+				label.col-sm-2.col-sm-2-custom-width.control-label(for="userLastName") Last Name: 
+					span.asterik-red-regular *
+				div.col-sm-4.col-sm-4-custom-width
+					input.form-control(type="text", id="userLastName", , ng-model="newUser.lastName", placeholder="Last Name", required)
+			div.form-group
+				label.col-sm-2.col-sm-2-custom-width.control-label(for="userPhone") Phone Number: 
+				div.col-sm-4.col-sm-4-custom-width
+					input.form-control(type="number", id="userPhone", , ng-model="newUser.phone", placeholder="Phone Number")
+				label.col-sm-2.col-sm-2-custom-width.control-label(for="userEmail") Email: 
+					span.asterik-red-regular *
+				div.col-sm-4.col-sm-4-custom-width
+					input.form-control(type="email", id="userEmail", , ng-model="newUser.email", placeholder="Email", required)
+			div.form-group
+				label.col-sm-2.col-sm-2-custom-width.control-label(for="userUsername") Username:
+				div.col-sm-4.col-sm-4-custom-width
+					input.form-control(type="text", id="userUsername", , ng-model="newUser.username", placeholder="{{newUser.username}}", disabled)
+			hr.hr-margins
+			div.form.group
+				div.col-sm-12.bg-info.custom-bg-info.text-right
+					h4.bg-info-title Address
+			div.form-group
+				label.col-sm-2.col-sm-2-custom-width.control-label(for="userAddress1") Address 1
+				div.col-sm-10.col-sm-10-custom-width
+					input.form-control(type="text", id="userAddress1", ng-model="newUser.address.address1", placeholder="Address 1")
+			div.form-group
+				label.col-sm-2.col-sm-2-custom-width.control-label(for="userAddress2") Address 2
+				div.col-sm-10.col-sm-10-custom-width
+					input.form-control(type="text", id="userAddress2", ng-model="newUser.address.address2", placeholder="Address 2")
+			div.form-group
+				label.col-sm-2.col-sm-2-custom-width.control-label(for="stateCities") City 
+					span.asterik-red-regular *
+				div.col-sm-2.col-sm-2-custom-width-2
+					select.form-control(id="stateCities", ng-model="newUser.address.city", ng-disabled="!newUser.address.state")
+						option(ng-repeat="city in stateCities track by myTrackingFunction(city)", value="{{city}}") {{city}}
+				label.col-sm-2.col-sm-2-custom-width.control-label(for="userState") State 
+					span.asterik-red-regular *
+				div.col-sm-2.col-sm-2-custom-width-2
+					select.form-control(id="userState", ng-model="newUser.address.state", ng-change="getCities(newUser.address.state)")
+						option(ng-repeat="state in states", value="{{state}}") {{state}}
+				label.col-sm-2.col-sm-2-custom-width.control-label(for="userZip") ZipCode 
+					span.asterik-red-regular *
+				div.col-sm-2.col-sm-2-custom-width-2
+					input.form-control(type="number", id="userZip", placeholder="ZipCode", ng-model="newUser.address.zipCode", ng-change="verifyZipCode()", ng-disabled="!newUser.address.city", required)
+					p(ng-if="zipCodeNotValidMessage") ZipCode does not exists.
+					p(ng-if="ZipCodeDoesNotMatchMessage") ZipCode does not match address.
+			div.clearfix
+				input.btn.btn-warning.btn-margin-top-30.btn-lg.pull-right(type="submit", value="Next")
 		//- input(type="submit", value="Submit")
 	//- {{userInfoForm.$valid}}
 	//- ng-pristine -> ng-dirty
