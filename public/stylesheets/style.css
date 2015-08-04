@@ -120,8 +120,69 @@ dl {
 
 /* Forms */
 
+.custom-progress {
+	height: 40px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.custom-progress-bar {
+	line-height: 40px;
+}
+
+.custom-progress-bar-text {
+	font-size: 24px;
+}
+
+.custom-page-header {
+	margin-bottom: 40px;
+}
+
+.custom-well {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.custom-bg-info {
+	margin-bottom: 40px;
+	color: #ffffff;
+	background-color: #222222;
+	border-radius: 10px;
+}
+
+.bg-info-title {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.asterik-red-regular {
+	color: #d9534f;
+}
+
+.col-sm-2-custom-width {
+	width: 12.5%;
+}
+
+.col-sm-2-custom-width-2 {
+	width: 20.83333333%;
+}
+
+
+.col-sm-4-custom-width {
+	width: 37.5%;
+}
+
+.col-sm-10-custom-width {
+	width: 87.5%;
+}
+
 .form-control {
 	border: 3px solid #ccc;
+}
+
+.hr-margins {
+	margin-top: 60px;
+	margin-bottom: 40px;
 }
 
 .ng-invalid.ng-dirty {
@@ -133,4 +194,8 @@ dl {
 .ng-valid.ng-dirty {
 	/* Green */
 	border-color: #5cb85c;
+}
+
+.btn-margin-top-30 {
+	margin-top: 30px;
 }
