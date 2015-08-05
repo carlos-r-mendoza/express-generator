@@ -1,0 +1,18 @@
+div.table-responsive
+	table.table.table-striped
+		tr
+			th.text-center(ng-repeat="header in headers") {{header}}
+		tr
+			td {{data}}
+	nav.text-center
+		ul.pagination.pagination-lg
+			li
+				a(href="#" aria-label="Previous")
+					span(aria-hidden="true")&laquo;
+			li
+				a(href="#") 1
+			li
+				a(href="#") 2
+			li
+				a(href="#" aria-label="Next")
+					span(aria-hidden="true")&raquo;

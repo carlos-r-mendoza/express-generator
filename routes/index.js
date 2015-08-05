@@ -29,6 +29,13 @@ router.get('/views/:page', function(req, res, next) {
   }
 });
 
+
+// get directive pages 
+
+router.get('/directive/:template', function(req, res, next) {
+  res.render('directive-templates/' + req.params.template);
+}); 
+
 // Authentication Routes
 
 router.get('/authenticatedUserInfo', function(req, res, next){

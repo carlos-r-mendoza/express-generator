@@ -1,0 +1,22 @@
+p 
+	strong Name: 
+	| {{user_details.name}}
+p 
+	strong Username: 
+	| {{user_details.username}}
+p 
+	strong Email: 
+	| {{user_details.email}}
+p 
+	strong Address: 
+	| {{user_details.address.street}}, {{user_details.address.city}}, {{user_details.address.zipcode}} 
+p 
+	strong Phone: 
+	| {{user_details.phone}}
+p 
+	strong Website: 
+	| {{user_details.website}}
+p 
+	strong Company: 
+	| {{user_details.company.name}},
+	em {{user_details.company.catchPhrase}}, {{user_details.company.bs}}

@@ -18,10 +18,9 @@ div.row
 			div.btn-group.btn-profile-posts(role="group", aria-label="...", ng-hide="welcome_message")
 				button.btn.btn-default(type="button", ng-click="showUserProfile()") Profile
 				button.btn.btn-default(type="button", ng-click="showUserPosts()") Posts
-				a(ui-sref="to-do")
-					button.btn.btn-default(type="button") To Do
+				button.btn.btn-default(type="button", ng-click="showUserToDo()") ToDo
 			h4.name-title.pull-right {{user_details.name}}
-			hr		
+			hr.clear-right
 			div(ng-show="profile_details")
 				p 
 					strong Name: 
@@ -57,6 +56,8 @@ div.row
 						strong {{comment.name}}
 					p {{comment.body}}
 					footer {{comment.email}}
+			custom-table(headers="table.headings", data="table.data")
+
 				
 
 
