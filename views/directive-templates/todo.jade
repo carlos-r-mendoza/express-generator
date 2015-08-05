@@ -1,24 +1,27 @@
-pre Sorting predicate = {{predicate}}; reverse = {{reverse}}
-div.table-responsive
+div.form-group.has-feedback
+	label.control-label.sr-only(for="search") Search
+	input.form-control(id="search", type="text", placeholder="search", ng-model="search")
+	span.glyphicon.glyphicon-search.form-control-feedback(aria-hidden="true")
+div
 	table.table.table-striped
 		tr
-			th.text-center(ng-repeat="header in headers") {{header}} 
-				a(href="#", ng-show="reverse", ng-click="sortData($index)") 
+			th.text-center(ng-repeat="header in headers track by $index") {{header}} 
+				a(href="#", ng-show="toggleCheveron", ng-click="sortData($index); toggleCheveron = !toggleCheveron") 
 					span.glyphicon.glyphicon-chevron-up(aria-hidden="true")
-				a(href="#", ng-hide="reverse", ng-click="sortData($index)")
+				a(href="#", ng-hide="toggleCheveron", ng-click="sortData($index); toggleCheveron = !toggleCheveron")
 					span.glyphicon.glyphicon-chevron-down(aria-hidden="true")
-		tr(ng-repeat="row in rows | orderBy:predicate:reverse", ng-if="startPageRange <= $index && $index < endPageRange")
-			td {{$index + 1}}
-			td(ng-bind-html='row.column2')
-			td {{row.column3}}
-			td {{row.column4}}
+		tr(ng-repeat="row in rows | orderBy:predicate:reverse | filter:search", ng-if="startPageRange <= $index && $index < endPageRange")
+			td.text-center {{row.column1}}
+			td(ng-if="!search") {{row.column2}}
+			td(ng-if="search", ng-bind-html="highlight(row.column2, search)")
+			td.text-center {{row.column3}}
 	nav.text-center
 		ul.pagination.pagination-lg
-			li(ng-click="showPreviousPage()")
+			li(ng-class="{disabled: selected === 0}", ng-click="showPreviousPage()")
 				a(href="#", aria-label="Previous")
 					span(aria-hidden="true")&laquo;
-			li(ng-repeat="page in numberOfPages track by $index", ng-click="showPage($index)")
+			li(ng-repeat="page in numberOfPages track by $index", ng-class="{active: selected === $index}", ng-click="showPage($index); setAsSelected($index)")
 				a(href="#") {{$index + 1}}
-			li(ng-click="showNextPage()")
+			li(ng-class="{disabled: selected === numberOfPages.length - 1}", ng-click="showNextPage()")
 				a(href="#" aria-label="Next")
 					span(aria-hidden="true")&raquo;

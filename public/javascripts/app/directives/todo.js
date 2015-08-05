@@ -16,10 +16,8 @@ app.directive('customTable', function($sce) {
 			column1: "",
 			column2: "",
 			column3: "",
-			column4: ""
 			};
 			console.log('element', element)
-
 			scope.sortData = function(indx) {
 				scope.predicate = Object.keys(row)[indx];
 				scope.reverse = !scope.reverse;
@@ -35,26 +33,27 @@ app.directive('customTable', function($sce) {
 			scope.$watch('data', function(newVal, oldVal) {
 
 				//console.log('attrs', scope.type, scope.data, scope.headers)
-				
-				angular.forEach(scope.data, function(task){
+				scope.rows = [];
+				angular.forEach(scope.data, function(task, indx){
+					
 					row = {
 						column1: "",
 						column2: "",
 						column3: "",
-						column4: ""
 						};
 
-					row.column1 = task.title;
-					row.column2 = $sce.trustAsHtml('<input type="checkbox" />');
+					row.column1 = indx + 1;
+					//row.column2 = $sce.trustAsHtml('<input type="checkbox" />');
+					row.column2 = task.title;
 					row.column3 = task.completed;
-					row.column4 = task.completed;
 
 					scope.rows.push(row);
 
 				});
 
+				console.log('a', scope.rows, scope.data)
 				// pagination
-				scope.itemsPerPage = 10;
+				scope.itemsPerPage = 5;
 				scope.currentPage = 0;
 				scope.numberOfPages = new Array(Math.ceil(scope.rows.length / scope.itemsPerPage));
 				scope.startPageRange = 0;
@@ -69,6 +68,7 @@ app.directive('customTable', function($sce) {
 					if(scope.startPageRange - scope.itemsPerPage >= 0) {
 						scope.startPageRange -= scope.itemsPerPage;
 						scope.endPageRange -= scope.itemsPerPage; 
+						scope.selected -= 1;
 					}
 				};
 
@@ -77,17 +77,24 @@ app.directive('customTable', function($sce) {
 						console.log(scope.endPageRange, scope.rows.length)
 						scope.startPageRange += scope.itemsPerPage;
 						scope.endPageRange += scope.itemsPerPage; 
+						scope.selected += 1;
 					}
 				};
 
+				// active class for pagination
+				scope.selected = 0;
+				scope.setAsSelected = function(indx) {
+					scope.selected = indx;
+				}
 			
-				// // sorting
-				// scope.predicate = '';
-				// scope.reverse = true;
-
-
 			});
-
+	
+		scope.$watch('search', function(newVal, oldVal){
+			scope.highlight = function(fullText, searchTerm) {
+				console.log('highlighting');
+				return $sce.trustAsHtml(fullText.replace(new RegExp(searchTerm, 'gi'), '<span class="highlight-text">$&</span>'));
+			}
+		})
 
 		}
 	}
