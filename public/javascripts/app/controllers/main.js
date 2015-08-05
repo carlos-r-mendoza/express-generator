@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comments', 'Auth', '$rootScope', function($scope, $state, Users, Posts, Comments, Auth, $rootScope) {
+app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comments', 'ToDo', 'Auth', '$rootScope', function($scope, $state, Users, Posts, Comments, ToDo, Auth, $rootScope) {
 		
 		//search friends
 		$scope.search = '';
@@ -39,6 +39,7 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 			//modifies view
 			$scope.welcome_message = false;
 			$scope.profile_posts = false;
+			$scope.todoList = false;
 			$scope.profile_details = true;
 			//populates user details
 			$scope.user_details = user;
@@ -53,7 +54,7 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 		//profile button logic
 		$scope.showUserProfile = function() {
 			$scope.profile_posts = false;
-
+			$scope.todo = false;
 
 			$scope.profile_details = true;
 		}
@@ -75,11 +76,53 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 
 		}
 
+		$scope.userToDoList = "";
+
 		//gets post's comments when see comments button is clicked
 		$scope.togglePostComments = function(post) {
 			Comments.getByPostId(post.id)
 				.then(function(data){
 					post.comments = data;
+				})
+		}
+
+		$scope.hello = {
+			title: "hello"
+		}
+
+		$scope.table = {
+			headings: [
+				'Task',
+				'Mark Completed',
+				'Pending',
+				'Completed'
+				],
+		};
+
+		$scope.$watch($scope.table.data, function(newValue){
+				console.log('watching', newValue)
+		})
+
+		$scope.showUserToDo = function() {
+			ToDo.getByUserId($scope.user.id)
+				.then(function(data){
+					
+					$scope.profile_posts = false;
+					$scope.profile_details = false;
+					$scope.todoList = true;
+					$scope.table.data = data;
+					console.log('todo', $scope.table.data)
+					// var userTasks = [];
+					// angular.forEach(data, function(userTasks, indx){
+					// 	var newUserObj = {
+					// 		column1: userTasks.title,
+					// 		column2: userTasks.
+					// 	}
+
+					// 	console.log('value', value)
+						
+					// })
+
 				})
 		}
 

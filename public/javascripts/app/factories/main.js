@@ -74,6 +74,26 @@ app.factory('Comments', ['$http', 'APIConfig', function($http, APIConfig) {
 	}
 }]);
 
+app.factory('ToDo', ['$http', 'APIConfig', function($http, APIConfig) {
+	
+	return {
+		//gets all todos
+		get: function() {
+			return $http.get(APIConfig.getRoot() + '/todos/')
+					.then(function(response){
+						return response.data;
+					})
+		},
+		//gets todo list by user id
+		getByUserId: function(userId) {
+			return $http.get(APIConfig.getRoot() + '/users/' + userId + '/todos')
+					.then(function(response){
+						return response.data;
+					})			
+		}
+	}
+}]);
+
 app.factory('Auth', ['$http', function($http) {
 
 	return {
