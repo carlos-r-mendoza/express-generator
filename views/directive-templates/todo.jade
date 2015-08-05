@@ -2,20 +2,18 @@ div.table-responsive
 	table.table.table-striped
 		tr
 			th.text-center(ng-repeat="header in headers") {{header}}
-		tr(ng-repeat="row in rows")
-			td {{row.column1}}
-			td {{row.column2}}
+		tr(ng-repeat="row in rows", ng-if="startPageRange <= $index && $index < endPageRange")
+			td {{$index + 1}}
+			td(ng-bind-html='row.column2')
 			td {{row.column3}}
 			td {{row.column4}}
 	nav.text-center
 		ul.pagination.pagination-lg
-			li
-				a(href="#" aria-label="Previous")
+			li(ng-click="showPreviousPage()")
+				a(href="#", aria-label="Previous")
 					span(aria-hidden="true")&laquo;
-			li
-				a(href="#") 1
-			li
-				a(href="#") 2
-			li
+			li(ng-repeat="page in numberOfPages track by $index", ng-click="showPage($index)")
+				a(href="#") {{$index + 1}}
+			li(ng-click="showNextPage()")
 				a(href="#" aria-label="Next")
 					span(aria-hidden="true")&raquo;
