@@ -97,7 +97,6 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 				'Pending',
 				'Completed'
 				],
-			data: $scope.userToDoList
 		};
 
 		$scope.$watch($scope.table.data, function(newValue){
@@ -113,6 +112,17 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 					$scope.todoList = true;
 					$scope.table.data = data;
 					console.log('todo', $scope.table.data)
+					// var userTasks = [];
+					// angular.forEach(data, function(userTasks, indx){
+					// 	var newUserObj = {
+					// 		column1: userTasks.title,
+					// 		column2: userTasks.
+					// 	}
+
+					// 	console.log('value', value)
+						
+					// })
+
 				})
 		}
 

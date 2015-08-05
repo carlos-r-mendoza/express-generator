@@ -6,15 +6,17 @@ app.directive('customTable', function($timeout) {
 		templateUrl: '/directive/todo',
 		scope: {
 			headers: '=',
-			data: '='	
+			data: '=',
+			type: '@'	
 		},
 		// link runs after directive has been compiled and linked up
 		link: function(scope, element, attrs) {
-			// element refers to the outermost element of the directive
-			// allows us to access any attributes that are set in the directives elements
-			// scope.$watch(attrs.data, function(newValue){
-			// 	console.log('watching', newValue)
-			// })
+			// once values change in parent controller, update 
+			scope.$watch('data', function(newVal, oldVal) {
+			console.log('attrs', scope.type, scope.data, scope.headers)
+			
+
+			})
 		}
 	}
 });
