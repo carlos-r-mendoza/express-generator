@@ -2,8 +2,11 @@ div.table-responsive
 	table.table.table-striped
 		tr
 			th.text-center(ng-repeat="header in headers") {{header}}
-		tr
-			td {{data}}
+		tr(ng-repeat="row in rows")
+			td {{row.column1}}
+			td {{row.column2}}
+			td {{row.column3}}
+			td {{row.column4}}
 	nav.text-center
 		ul.pagination.pagination-lg
 			li
