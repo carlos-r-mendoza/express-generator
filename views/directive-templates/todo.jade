@@ -1,8 +1,13 @@
+pre Sorting predicate = {{predicate}}; reverse = {{reverse}}
 div.table-responsive
 	table.table.table-striped
 		tr
-			th.text-center(ng-repeat="header in headers") {{header}}
-		tr(ng-repeat="row in rows", ng-if="startPageRange <= $index && $index < endPageRange")
+			th.text-center(ng-repeat="header in headers") {{header}} 
+				a(href="#", ng-show="reverse", ng-click="sortData($index)") 
+					span.glyphicon.glyphicon-chevron-up(aria-hidden="true")
+				a(href="#", ng-hide="reverse", ng-click="sortData($index)")
+					span.glyphicon.glyphicon-chevron-down(aria-hidden="true")
+		tr(ng-repeat="row in rows | orderBy:predicate:reverse", ng-if="startPageRange <= $index && $index < endPageRange")
 			td {{$index + 1}}
 			td(ng-bind-html='row.column2')
 			td {{row.column3}}
