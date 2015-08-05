@@ -88,14 +88,13 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 
 		$scope.hello = {
 			title: "hello"
-		}
+		};
 
 		$scope.table = {
 			headings: [
 				'Task',
 				'Mark Completed',
-				'Pending',
-				'Completed'
+				'Status'
 				],
 		};
 

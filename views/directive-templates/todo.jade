@@ -1,17 +1,18 @@
 pre Sorting predicate = {{predicate}}; reverse = {{reverse}}
-div.table-responsive
+input(type="text", placeholder="search", ng-model="search")
+div
 	table.table.table-striped
 		tr
-			th.text-center(ng-repeat="header in headers") {{header}} 
-				a(href="#", ng-show="reverse", ng-click="sortData($index)") 
+			th.text-center(ng-repeat="header in headers track by $index") {{header}} 
+				a(href="#", ng-show="toggleCheveron", ng-click="sortData($index); toggleCheveron = !toggleCheveron") 
 					span.glyphicon.glyphicon-chevron-up(aria-hidden="true")
-				a(href="#", ng-hide="reverse", ng-click="sortData($index)")
+				a(href="#", ng-hide="toggleCheveron", ng-click="sortData($index); toggleCheveron = !toggleCheveron")
 					span.glyphicon.glyphicon-chevron-down(aria-hidden="true")
-		tr(ng-repeat="row in rows | orderBy:predicate:reverse", ng-if="startPageRange <= $index && $index < endPageRange")
-			td {{$index + 1}}
-			td(ng-bind-html='row.column2')
-			td {{row.column3}}
-			td {{row.column4}}
+		tr(ng-repeat="row in rows | orderBy:predicate:reverse | filter:search", ng-if="startPageRange <= $index && $index < endPageRange")
+			td.text-center {{row.column1}}
+			//- td(ng-bind-html='row.column2')
+			td {{row.column2}}
+			td.text-center {{row.column3}}
 	nav.text-center
 		ul.pagination.pagination-lg
 			li(ng-click="showPreviousPage()")
