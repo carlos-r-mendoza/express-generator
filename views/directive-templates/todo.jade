@@ -1,27 +1,29 @@
 div.form-group.has-feedback
 	label.control-label.sr-only(for="search") Search
-	input.form-control(id="search", type="text", placeholder="search", ng-model="search")
+	input.form-control.input-lg(id="search", type="text", placeholder="search", ng-model="search")
 	span.glyphicon.glyphicon-search.form-control-feedback(aria-hidden="true")
-div
+div.table-height
 	table.table.table-striped
-		tr
-			th.text-center(ng-repeat="header in headers track by $index") {{header}} 
-				a(href="#", ng-show="toggleCheveron", ng-click="sortData($index); toggleCheveron = !toggleCheveron") 
-					span.glyphicon.glyphicon-chevron-up(aria-hidden="true")
-				a(href="#", ng-hide="toggleCheveron", ng-click="sortData($index); toggleCheveron = !toggleCheveron")
-					span.glyphicon.glyphicon-chevron-down(aria-hidden="true")
-		tr(ng-repeat="row in rows | orderBy:predicate:reverse | filter:search", ng-if="startPageRange <= $index && $index < endPageRange")
-			td.text-center {{row.column1}}
-			td(ng-if="!search") {{row.column2}}
-			td(ng-if="search", ng-bind-html="highlight(row.column2, search)")
-			td.text-center {{row.column3}}
-	nav.text-center
-		ul.pagination.pagination-lg
-			li(ng-class="{disabled: selected === 0}", ng-click="showPreviousPage()")
-				a(href="#", aria-label="Previous")
-					span(aria-hidden="true")&laquo;
-			li(ng-repeat="page in numberOfPages track by $index", ng-class="{active: selected === $index}", ng-click="showPage($index); setAsSelected($index)")
-				a(href="#") {{$index + 1}}
-			li(ng-class="{disabled: selected === numberOfPages.length - 1}", ng-click="showNextPage()")
-				a(href="#" aria-label="Next")
-					span(aria-hidden="true")&raquo;
+		thead
+			tr
+				th.text-center(ng-repeat="header in headers track by $index") {{header}} 
+					a(href="#", ng-show="toggleCheveron", ng-click="sortData($index); toggleCheveron = !toggleCheveron") 
+						span.glyphicon.glyphicon-chevron-up(aria-hidden="true")
+					a(href="#", ng-hide="toggleCheveron", ng-click="sortData($index); toggleCheveron = !toggleCheveron")
+						span.glyphicon.glyphicon-chevron-down(aria-hidden="true")
+		tbody
+			tr.tr-height.table-tr-hover(ng-repeat="row in rows | orderBy:predicate:reverse | filter:search", ng-if="startPageRange <= $index && $index < endPageRange")
+				td.text-center.table-td-width {{row.column1}}
+				td(ng-if="!search") {{row.column2}}
+				td(ng-if="search", ng-bind-html="highlight(row.column2, search)")
+				td.text-center.table-td-width {{row.column3}}
+nav.text-center
+	ul.pagination.pagination-lg
+		li(ng-class="{disabled: selected === 0}", ng-click="showPreviousPage()")
+			a(href="#", aria-label="Previous")
+				span(aria-hidden="true")&laquo;
+		li(ng-repeat="page in numberOfPages track by $index", ng-class="{active: selected === $index}", ng-click="showPage($index); setAsSelected($index)")
+			a(href="#") {{$index + 1}}
+		li(ng-class="{disabled: selected === numberOfPages.length - 1}", ng-click="showNextPage()")
+			a(href="#" aria-label="Next")
+				span(aria-hidden="true")&raquo;

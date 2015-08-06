@@ -1,7 +1,7 @@
 div.row
-	h2.well.text-center.col-sm-12.col-md-12.col-lg-12 {{title}}
+	h2.well.text-center.col-sm-12 {{title}}
 div.row
-	div.well.col-sm-3.col-md-3.col-lg-3
+	div.well.col-sm-3
 		h4.text-center Friends List
 		hr
 		div.bg-info.friends-list-section
@@ -12,13 +12,14 @@ div.row
 				div.friend-name-space
 					strong {{user.name}}
 					button.btn.btn-primary.btn-profile(ng-click="toggleProfile(user)") View Profile
-	div.well.friend-details-section.col-sm-8.col-sm-offset-1.col-md-8.col-md-offset-1.col-lg-8.col-md-offset-1
+	div.col-sm-1.custom-col-sm-1-width
+	div.well.friend-details-section.col-sm-8.custom-col-sm-8-width
 			div(ng-show="welcome_message")
 				p Welcome! Click on a friend to see their profile details!!
 			div.btn-group.btn-profile-posts(role="group", aria-label="...", ng-hide="welcome_message")
-				button.btn.btn-default(type="button", ng-click="showUserProfile()") Profile
-				button.btn.btn-default(type="button", ng-click="showUserPosts()") Posts
-				button.btn.btn-default(type="button", ng-click="showUserToDo()") ToDo
+				button.btn.btn-default(type="button", ng-class="{active: selected === 'Profile'}", ng-click="showUserProfile(); selected = 'Profile'") Profile
+				button.btn.btn-default(type="button", ng-class="{active: selected === 'Posts'}", ng-click="showUserPosts(); selected = 'Posts'") Posts
+				button.btn.btn-default(type="button", ng-class="{active: selected === 'ToDo'}", ng-click="showUserToDo(); selected = 'ToDo'") ToDo
 			h4.name-title.pull-right {{user_details.name}}
 			hr.clear-right
 			div(ng-show="profile_details")
@@ -56,7 +57,7 @@ div.row
 						strong {{comment.name}}
 					p {{comment.body}}
 					footer {{comment.email}}
-			custom-table(headers="table.headings", data="table.data", type="userTasks")
+			custom-table(ng-if="todoList", headers="table.headings", data="table.data", type="userTasks")
 
 				
 

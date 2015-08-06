@@ -32,7 +32,9 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 		$scope.user;
 
 		//gets user's posts when view profile button is clicked
+		$scope.selected = 'Profile';
 		$scope.toggleProfile = function(user) {
+			$scope.selected = 'Profile';
 
 			$scope.user = user;
 
@@ -55,6 +57,8 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 		$scope.showUserProfile = function() {
 			$scope.profile_posts = false;
 			$scope.todo = false;
+			$scope.todoList = false;
+
 
 			$scope.profile_details = true;
 		}
@@ -62,6 +66,8 @@ app.controller('MainController', ['$scope', '$state', 'Users', 'Posts', 'Comment
 		//posts button logic
 		$scope.showUserPosts = function() {
 			$scope.profile_details = false;
+			$scope.todoList = false;
+
 
 
 			//gets user's posts
