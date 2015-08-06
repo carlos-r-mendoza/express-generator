@@ -53,7 +53,7 @@ app.directive('customTable', function($sce) {
 
 				console.log('a', scope.rows, scope.data)
 				// pagination
-				scope.itemsPerPage = 5;
+				scope.itemsPerPage = 8;
 				scope.currentPage = 0;
 				scope.numberOfPages = new Array(Math.ceil(scope.rows.length / scope.itemsPerPage));
 				scope.startPageRange = 0;
@@ -73,7 +73,8 @@ app.directive('customTable', function($sce) {
 				};
 
 				scope.showNextPage = function() {
-					if(scope.endPageRange + scope.itemsPerPage <= scope.rows.length) {
+					console.log(scope.endPageRange)
+					if(scope.endPageRange <= scope.rows.length) {
 						console.log(scope.endPageRange, scope.rows.length)
 						scope.startPageRange += scope.itemsPerPage;
 						scope.endPageRange += scope.itemsPerPage; 
